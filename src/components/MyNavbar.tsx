@@ -4,9 +4,22 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 function MyNavbar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar
+      expand="lg"
+      style={{ background: "linear-gradient(90deg, #7f00ff, #00bfff)" }}
+      data-bs-theme="dark"
+    >
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <img
+            src="/assets/logojpp.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="React Bootstrap logo"
+          />
+        </Navbar.Brand>
+        <Navbar.Brand href="#home">JewelPaper Books</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
