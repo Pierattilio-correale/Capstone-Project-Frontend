@@ -7,9 +7,15 @@ body{
 }
 
 .buttonanimation {
-  transition: transform 0.5s ease-in-out;
+  background: linear-gradient(90deg, #7f00ff, #00bfff) !important;
+  border: none !important;
+  color: white !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.375rem !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  transition: transform 0.3s ease-in-out !important;
 }
 
 .buttonanimation:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) !important;
 }

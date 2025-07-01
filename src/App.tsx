@@ -5,6 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import ProvaFetch from "./components/ProvaFetch";
 import MyNavbar from "./components/MyNavbar";
 import sfondImg from "../../src/assets/sfondocapstone.jpg";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <ProvaFetch />
         <MyNavbar />
+        <Home />
       </BrowserRouter>
     </>
   );
