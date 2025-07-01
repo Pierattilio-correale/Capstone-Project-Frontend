@@ -16,8 +16,10 @@ function MyNavbar() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [nome, setNome] = useState<string>("");
+  const [cognome, setCognome] = useState<string>("");
+  const [dataNascita, setDataNascita] = useState<string>("");
 
-  // NUOVO: stato per dropdown show
   const [showUserDropdown, setShowUserDropdown] = useState<boolean>(false);
 
   const handleCloseRegister = () => setShowRegister(false);
@@ -25,6 +27,33 @@ function MyNavbar() {
 
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowLogin = () => setShowLogin(true);
+
+  const registerPagina = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const body = {
+      nome,
+      cognome,
+      dataNascita,
+      email,
+      username,
+      password,
+    };
+
+    fetch("http://localhost:8080/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Registrazione fallita");
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Registrazione avvenuta:", data);
+        setShowRegister(false);
+      })
+      .catch((err) => console.error(err));
+  };
 
   const loginPagina = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,10 +89,9 @@ function MyNavbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    setShowUserDropdown(false); // chiudo dropdown logout
+    setShowUserDropdown(false);
   };
 
-  // toggle dropdown al click immagine
   const toggleUserDropdown = () => {
     setShowUserDropdown((prev) => !prev);
   };
@@ -233,13 +261,80 @@ function MyNavbar() {
           <Modal.Title>Registrazione</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Crea il tuo account inserendo le informazioni richieste.
+          <h6>
+            Benvenuto in JewelBook! <br />
+            Crea il tuo account inserendo le informazioni richieste.
+          </h6>
+          <Form onSubmit={registerPagina}>
+            <Form.Group className="mb-3" controlId="formNome">
+              <Form.Label>Nome</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Mario"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formCognome">
+              <Form.Label>Cognome</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Rossi"
+                value={cognome}
+                onChange={(e) => setCognome(e.target.value)}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formDataNascita">
+              <Form.Label>Data di nascita</Form.Label>
+              <Form.Control
+                type="date"
+                value={dataNascita}
+                onChange={(e) => setDataNascita(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="mariorossi22"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Registrati
+            </Button>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseRegister}>
             Chiudi
           </Button>
-          <Button variant="primary">Registrati</Button>
         </Modal.Footer>
       </Modal>
     </Navbar>

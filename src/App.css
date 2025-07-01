@@ -19,3 +19,11 @@ body{
 .buttonanimation:hover {
   transform: scale(1.05) !important;
 }
+
+.footeranchor{
+  text-decoration: none;
+  color: white;
+}
+.footeranchor:hover{
+  color: aqua;
+}
