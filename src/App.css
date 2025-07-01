@@ -5,3 +5,11 @@ body{
   background-position: center center;
   min-height: 100vh;
 }
+
+.buttonanimation {
+  transition: transform 0.5s ease-in-out;
+}
+
+.buttonanimation:hover {
+  transform: scale(1.05);
+}
