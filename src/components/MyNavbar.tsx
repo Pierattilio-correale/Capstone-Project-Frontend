@@ -8,6 +8,7 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import { jwtDecode } from "jwt-decode";
 
 function MyNavbar() {
   const [showRegister, setShowRegister] = useState<boolean>(false);
@@ -19,6 +20,7 @@ function MyNavbar() {
   const [nome, setNome] = useState<string>("");
   const [cognome, setCognome] = useState<string>("");
   const [dataNascita, setDataNascita] = useState<string>("");
+  const [data, setData] = useState<any>(null);
 
   const [showUserDropdown, setShowUserDropdown] = useState<boolean>(false);
 
@@ -55,6 +57,43 @@ function MyNavbar() {
       .catch((err) => console.error(err));
   };
 
+  const getUserIdFromToken = (): string | null => {
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+    try {
+      const decoded: any = jwtDecode(token);
+      return decoded.sub;
+    } catch (err) {
+      console.error("Errore nel decodificare il token:", err);
+      return null;
+    }
+  };
+
+  const utenteLoggato = () => {
+    const userId = getUserIdFromToken();
+    if (!userId) {
+      console.error("ID utente non trovato nel token");
+      return;
+    }
+
+    fetch(`http://localhost:8080/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Errore nella fetch");
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Dati utente loggato:", data);
+        setData(data);
+      })
+      .catch((err) => {
+        console.error("Errore nella richiesta:", err);
+      });
+  };
+
   const loginPagina = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const body = {
@@ -69,17 +108,15 @@ function MyNavbar() {
       body: JSON.stringify(body),
     })
       .then((response) => {
-        if (response.ok) {
-          return response.text();
-        } else {
-          throw new Error("Errore nella fetch");
-        }
+        if (!response.ok) throw new Error("Errore nella fetch");
+        return response.text();
       })
       .then((token) => {
         console.log("Token ricevuto:", token);
         localStorage.setItem("token", token);
         setIsLoggedIn(true);
         setShowLogin(false);
+        utenteLoggato();
       })
       .catch((err) => {
         console.error("Errore nella promise:", err);
@@ -118,7 +155,7 @@ function MyNavbar() {
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown title="Per te" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
@@ -161,7 +198,7 @@ function MyNavbar() {
                   className="mx-2"
                   title={
                     <img
-                      src="/assets/logojpp.png"
+                      src={data?.avatar}
                       width={40}
                       height={40}
                       style={{ cursor: "pointer", borderRadius: "50%" }}
@@ -176,12 +213,15 @@ function MyNavbar() {
                   show={showUserDropdown}
                   onToggle={() => {}}
                 >
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                  <h4 className="ms-2"> Ciao! {data?.username}</h4>
+                  <NavDropdown.Item href="#action/3.1">
+                    Mio profilo
+                  </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">
-                    Another action
+                    Crea Storia
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3">
-                    Something
+                    Statistiche
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">
