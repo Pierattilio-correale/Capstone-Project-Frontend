@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   Button,
@@ -9,37 +9,65 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
+
+interface User {
+  id: number;
+  nome: string;
+  cognome: string;
+  username: string;
+  email: string;
+  dataNascita: string;
+  avatar: string;
+  role: string;
+}
+
+interface JwtPayload {
+  sub: string;
+  exp?: number;
+  iat?: number;
+}
 
 function MyNavbar() {
-  const [showRegister, setShowRegister] = useState<boolean>(false);
-  const [showLogin, setShowLogin] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [nome, setNome] = useState<string>("");
-  const [cognome, setCognome] = useState<string>("");
-  const [dataNascita, setDataNascita] = useState<string>("");
-  const [data, setData] = useState<any>(null);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [nome, setNome] = useState("");
+  const [cognome, setCognome] = useState("");
+  const [dataNascita, setDataNascita] = useState("");
+  const [data, setData] = useState<User | null>(null);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
 
-  const [showUserDropdown, setShowUserDropdown] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode<JwtPayload>(token);
+        if (decoded?.sub) {
+          setIsLoggedIn(true);
+          utenteLoggato();
+        }
+      } catch (err) {
+        console.error("Token non valido:", err);
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+      }
+    }
+  }, []);
 
   const handleCloseRegister = () => setShowRegister(false);
   const handleShowRegister = () => setShowRegister(true);
-
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowLogin = () => setShowLogin(true);
 
   const registerPagina = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const body = {
-      nome,
-      cognome,
-      dataNascita,
-      email,
-      username,
-      password,
-    };
+    const body = { nome, cognome, dataNascita, email, username, password };
 
     fetch("http://localhost:8080/auth/register", {
       method: "POST",
@@ -61,7 +89,7 @@ function MyNavbar() {
     const token = localStorage.getItem("token");
     if (!token) return null;
     try {
-      const decoded: any = jwtDecode(token);
+      const decoded = jwtDecode<JwtPayload>(token);
       return decoded.sub;
     } catch (err) {
       console.error("Errore nel decodificare il token:", err);
@@ -71,10 +99,7 @@ function MyNavbar() {
 
   const utenteLoggato = () => {
     const userId = getUserIdFromToken();
-    if (!userId) {
-      console.error("ID utente non trovato nel token");
-      return;
-    }
+    if (!userId) return;
 
     fetch(`http://localhost:8080/users/${userId}`, {
       headers: {
@@ -96,11 +121,7 @@ function MyNavbar() {
 
   const loginPagina = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const body = {
-      username,
-      password,
-      email,
-    };
+    const body = { username, password, email };
 
     fetch("http://localhost:8080/auth/login", {
       method: "POST",
@@ -112,7 +133,6 @@ function MyNavbar() {
         return response.text();
       })
       .then((token) => {
-        console.log("Token ricevuto:", token);
         localStorage.setItem("token", token);
         setIsLoggedIn(true);
         setShowLogin(false);
@@ -127,6 +147,8 @@ function MyNavbar() {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setShowUserDropdown(false);
+    setData(null);
+    navigate("/");
   };
 
   const toggleUserDropdown = () => {
@@ -140,7 +162,7 @@ function MyNavbar() {
       data-bs-theme="dark"
     >
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand as={Link} to="/">
           <img
             src="/assets/logojpp.png"
             width={30}
@@ -149,11 +171,15 @@ function MyNavbar() {
             alt="React Bootstrap logo"
           />
         </Navbar.Brand>
-        <Navbar.Brand href="#home">JewelPaper Books</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          JewelPaper Books
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Per te" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -174,7 +200,6 @@ function MyNavbar() {
               placeholder="Cerca il tuo libro.."
               className="me-2"
             />
-
             <Button className="buttonanimation me-3">Submit</Button>
 
             {!isLoggedIn ? (
@@ -202,21 +227,24 @@ function MyNavbar() {
                       width={40}
                       height={40}
                       style={{ cursor: "pointer", borderRadius: "50%" }}
+                      alt="User"
                       onClick={(e) => {
                         e.preventDefault();
                         toggleUserDropdown();
                       }}
-                      alt="User"
                     />
                   }
                   id="user-nav-dropdown"
                   show={showUserDropdown}
                   onToggle={() => {}}
                 >
-                  <h4 className="ms-2"> Ciao! {data?.username}</h4>
-                  <NavDropdown.Item href="#action/3.1">
+                  <h4 className="mx-2">Ciao, {data?.username}</h4>
+                  <Link
+                    to={`/ProfileDetails/${data?.id}`}
+                    className="dropdown-item"
+                  >
                     Mio profilo
-                  </NavDropdown.Item>
+                  </Link>
                   <NavDropdown.Item href="#action/3.2">
                     Crea Storia
                   </NavDropdown.Item>
@@ -224,11 +252,8 @@ function MyNavbar() {
                     Statistiche
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
-                    Separated link
-                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.4">Altro</NavDropdown.Item>
                 </NavDropdown>
-
                 <Button className="buttonanimation" onClick={handleLogout}>
                   Logout
                 </Button>
@@ -302,7 +327,8 @@ function MyNavbar() {
         </Modal.Header>
         <Modal.Body>
           <h6>
-            Benvenuto in JewelBook! <br />
+            Benvenuto in JewelBook!
+            <br />
             Crea il tuo account inserendo le informazioni richieste.
           </h6>
           <Form onSubmit={registerPagina}>
@@ -316,7 +342,6 @@ function MyNavbar() {
                 required
               />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formCognome">
               <Form.Label>Cognome</Form.Label>
               <Form.Control
@@ -327,7 +352,6 @@ function MyNavbar() {
                 required
               />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="formDataNascita">
               <Form.Label>Data di nascita</Form.Label>
               <Form.Control
@@ -338,7 +362,7 @@ function MyNavbar() {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@example.com"

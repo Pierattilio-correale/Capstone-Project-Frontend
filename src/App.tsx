@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import ProvaFetch from "./components/ProvaFetch";
 import MyNavbar from "./components/MyNavbar";
-import sfondImg from "../../src/assets/sfondocapstone.jpg";
 import Home from "./components/Home";
 import MyFooter from "./components/MyFooter";
+import ProfileDetails from "./components/ProfileDetails";
 
 function App() {
   return (
@@ -16,8 +16,13 @@ function App() {
           <ProvaFetch />
           <MyNavbar />
           <main className="flex-grow-1 ">
-            <Routes></Routes>
-            <Home />
+            <Routes>
+              <Route element={<Home />} path="/" />
+              <Route
+                element={<ProfileDetails />}
+                path="/ProfileDetails/:profileId"
+              />
+            </Routes>
           </main>
           <MyFooter />
         </div>

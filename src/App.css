@@ -27,3 +27,15 @@ body{
 .footeranchor:hover{
   color: aqua;
 }
+
+.translate{
+transform: translateY(-82px);
+color: white;
+
+}
+
+.fontnuovo{
+  font-family: "Cormorant", serif;
+          font-size: 55px;
+}
+
