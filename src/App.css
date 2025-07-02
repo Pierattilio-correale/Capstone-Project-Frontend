@@ -39,3 +39,18 @@ color: white;
           font-size: 55px;
 }
 
+.coloreJ{
+  color: #937DD2;
+}
+.colorep{
+color: #20ADFC;
+}
+
+.font-personalizzato-titolo{
+  font-size: 45px;
+ 
+ font-family: "Montserrat", sans-serif;
+}
+.gira{
+     transform: rotate(-180deg)
+}
