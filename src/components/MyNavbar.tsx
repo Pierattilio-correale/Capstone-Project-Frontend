@@ -157,6 +157,7 @@ function MyNavbar() {
 
   return (
     <Navbar
+      className=" sticky-top z-0"
       expand="lg"
       style={{ background: "linear-gradient(90deg, #7f00ff, #00bfff)" }}
       data-bs-theme="dark"

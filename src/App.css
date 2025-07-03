@@ -1,5 +1,5 @@
 body{
-    background-image: url("/assets/logopiri.png");
+    background-image: url("/assets/sfondofinale.jpg");
      background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -53,4 +53,23 @@ color: #20ADFC;
 }
 .gira{
      transform: rotate(-180deg)
+}
+
+
+.translatep2 {
+    transform: translate(229px, 64px);
+
+
+}
+
+.translatep3 {
+    transform: translate(229px, 74px);
+
+
+}
+.neon-border {
+  border-radius: 50%;
+  border: 4px solid #e71fff;
+    box-shadow: 0 0 5px #ff3ae1, 0 0 10px #db27eb, 0 0 20px #ff00f5, 0 0 40px #f321eb;
+  transition: box-shadow 0.3s ease-in-out;
 }
