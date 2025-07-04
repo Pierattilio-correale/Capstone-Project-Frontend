@@ -137,6 +137,7 @@ function MyNavbar() {
         setIsLoggedIn(true);
         setShowLogin(false);
         utenteLoggato();
+        navigate("/home");
       })
       .catch((err) => {
         console.error("Errore nella promise:", err);
@@ -163,7 +164,7 @@ function MyNavbar() {
       data-bs-theme="dark"
     >
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to={isLoggedIn ? "/home" : "/"}>
           <img
             src="/assets/logojpp.png"
             width={30}
@@ -172,13 +173,13 @@ function MyNavbar() {
             alt="React Bootstrap logo"
           />
         </Navbar.Brand>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to={isLoggedIn ? "/home" : "/"}>
           JewelPaper Books
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/" className="nav-link">
+            <Link to={isLoggedIn ? "/home" : "/"} className="nav-link">
               Home
             </Link>
             <Nav.Link href="#link">Link</Nav.Link>

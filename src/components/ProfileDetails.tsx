@@ -81,7 +81,6 @@ const ProfileDetails = () => {
                   </div>
                 </div>
 
-                {/* Bottoni profilo */}
                 <div className="d-flex flex-wrap gap-2 mt-3">
                   <Button variant="primary" className="rounded-pill">
                     Disponibile per

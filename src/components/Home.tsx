@@ -206,8 +206,8 @@ const Home = () => {
         <h2 className="text-white ">
           Vuoi iniziare anche tu a scrivere storie e realizzare i tuoi sogni?
         </h2>
-        <Button className="buttonanimation me-2">Login</Button>
-        <Button className="buttonanimation ">Register</Button>
+        <Button className="buttonanimation me-2 fs-4">Login</Button>
+        <Button className="buttonanimation fs-4">Registrazione</Button>
       </Container>
     </>
   );
