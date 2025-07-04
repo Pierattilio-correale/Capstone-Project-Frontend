@@ -73,3 +73,10 @@ color: #20ADFC;
     box-shadow: 0 0 5px #ff3ae1, 0 0 10px #db27eb, 0 0 20px #ff00f5, 0 0 40px #f321eb;
   transition: box-shadow 0.3s ease-in-out;
 }
+.col img {
+  transition: transform 0.2s;
+}
+
+.col img:hover {
+  transform: scale(1.1);
+}

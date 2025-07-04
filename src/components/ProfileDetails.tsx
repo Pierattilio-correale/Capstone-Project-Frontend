@@ -45,27 +45,6 @@ const ProfileDetails = () => {
       <Container className="my-4">
         <Row className="d-flex justify-content-center">
           <Col className="col-11">
-            {/* {" "}
-            <Card>
-              <Card.Img
-                variant="top"
-                // src={data?.avatar}
-                src="https://static.vecteezy.com/ti/vettori-gratis/t1/7773006-cartone-animato-open-shiny-libro-magico-concetto-con-luci-e-scintillii-vettoriale.jpg"
-                className="img-fluid mb-3"
-              />
-              <div className="card-body">
-                <h2 className="translate">
-                  {data?.username} <i className="bi bi-patch-check-fill"></i>
-                </h2>
-                <div className="d-flex flex-row-reverse fs-1 mt-0">
-                  <a>
-                    <i className="bi bi-pencil"></i>
-                  </a>
-                </div>
-
-                <Button variant="primary">Go somewhere</Button>
-              </div>
-            </Card> */}
             <div className="bg-white shadow-sm mb-4  rounded w-responsive">
               <div style={{ height: "200px", overflow: "hidden" }}>
                 <img
@@ -118,7 +97,6 @@ const ProfileDetails = () => {
                   </Button>
                 </div>
 
-                {/* Box disponibili a lavorare  ecc*/}
                 <div className="d-flex mt-4 flex-wrap gap-3 ">
                   <div className="flex-grow-1 flex-basis-0 p-3 border rounded bg-light">
                     <strong>Disponibile a lavorare</strong>

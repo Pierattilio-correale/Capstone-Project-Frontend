@@ -174,23 +174,40 @@ const Home = () => {
       <Container className="my-5">
         <h2>I migliori</h2>
         <Row className="g-1">
-          {data?.map((storia) => (
-            <Col className="col-2" key={storia.id}>
-              <Card>
+          {data?.slice(0, 6).map((storia) => (
+            <Col
+              className="col-lg-3 col-md-4 col-sm-6 col-xl-2 col-12 "
+              key={storia.id}
+            >
+              <Card className="d-flex flex-column h-100">
                 <Card.Img
                   variant="top"
                   src={storia.immagineCopertina}
                   alt={storia.titolo}
                 />
-                <Card.Body>
+                <Card.Body
+                  className="d-flex flex-column  text-white"
+                  style={{
+                    background: "linear-gradient(90deg, #7f00ff, #00bfff)",
+                  }}
+                >
                   <Card.Title>{storia.titolo}</Card.Title>
-                  <Card.Text>{storia.autore.username}</Card.Text>
-                  <Button variant="primary">Leggi!</Button>
+                  <Card.Text className="flex-grow-1">
+                    {storia.autore.username}
+                  </Card.Text>
+                  <Button variant="dark">Leggi!</Button>
                 </Card.Body>
               </Card>
             </Col>
           ))}
         </Row>
+      </Container>
+      <Container className="text-center">
+        <h2 className="text-white ">
+          Vuoi iniziare anche tu a scrivere storie e realizzare i tuoi sogni?
+        </h2>
+        <Button className="buttonanimation me-2">Login</Button>
+        <Button className="buttonanimation ">Register</Button>
       </Container>
     </>
   );
