@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Card, Button } from "react-bootstrap";
 
-const Home = () => {
+interface HomeProps {
+  handleCloseLogin: () => void;
+  handleCloseRegister: () => void;
+  handleShowRegister: () => void;
+  handleShowLogin: () => void;
+}
+const Home = ({
+  handleCloseLogin,
+  handleCloseRegister,
+  handleShowRegister,
+  handleShowLogin,
+}: HomeProps) => {
   interface User {
     id: number;
     nome: string;
@@ -20,6 +31,7 @@ const Home = () => {
     immagineCopertina: string;
     autore: User;
   }
+
   const [data, setData] = useState<Storia[]>([]);
 
   const fetchStorieIniziali = () => {
@@ -206,8 +218,12 @@ const Home = () => {
         <h2 className="text-white ">
           Vuoi iniziare anche tu a scrivere storie e realizzare i tuoi sogni?
         </h2>
-        <Button className="buttonanimation me-2 fs-4">Login</Button>
-        <Button className="buttonanimation fs-4">Registrazione</Button>
+        <Button className="buttonanimation me-2 fs-4" onClick={handleShowLogin}>
+          Login
+        </Button>
+        <Button className="buttonanimation fs-4" onClick={handleShowRegister}>
+          Registrazione
+        </Button>
       </Container>
     </>
   );

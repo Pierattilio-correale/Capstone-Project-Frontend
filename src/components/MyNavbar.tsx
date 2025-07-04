@@ -27,10 +27,23 @@ interface JwtPayload {
   exp?: number;
   iat?: number;
 }
+interface MyNavbarProps {
+  handleCloseLogin: () => void;
+  handleCloseRegister: () => void;
+  handleShowRegister: () => void;
+  handleShowLogin: () => void;
+  showLogin: boolean;
+  showRegister: boolean;
+}
 
-function MyNavbar() {
-  const [showRegister, setShowRegister] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
+function MyNavbar({
+  handleCloseLogin,
+  handleCloseRegister,
+  handleShowRegister,
+  handleShowLogin,
+  showLogin,
+  showRegister,
+}: MyNavbarProps) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -60,11 +73,6 @@ function MyNavbar() {
     }
   }, []);
 
-  const handleCloseRegister = () => setShowRegister(false);
-  const handleShowRegister = () => setShowRegister(true);
-  const handleCloseLogin = () => setShowLogin(false);
-  const handleShowLogin = () => setShowLogin(true);
-
   const registerPagina = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const body = { nome, cognome, dataNascita, email, username, password };
@@ -80,7 +88,7 @@ function MyNavbar() {
       })
       .then((data) => {
         console.log("Registrazione avvenuta:", data);
-        setShowRegister(false);
+        handleCloseRegister();
       })
       .catch((err) => console.error(err));
   };
@@ -135,7 +143,7 @@ function MyNavbar() {
       .then((token) => {
         localStorage.setItem("token", token);
         setIsLoggedIn(true);
-        setShowLogin(false);
+        handleCloseLogin();
         utenteLoggato();
         navigate("/home");
       })
