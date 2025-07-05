@@ -80,8 +80,8 @@ const Home = ({
           <Col className="col-12 col-xl-5 ">
             <h2 className="font-personalizzato-titolo text-white ms-5 ms-xxl-0   text-center">
               <i>
-                •<i className="coloreJ">J</i>wel<i className="colorep">P</i>aper
-                Books•
+                •<i className="coloreJ">J</i>ewel<i className="colorep">P</i>
+                aper Books•
               </i>
             </h2>
           </Col>
@@ -91,7 +91,7 @@ const Home = ({
       <Container className="p-1 my-2">
         <Row className="">
           <Col className="col-12 mb-5 pb-5 pb-lg-0 mb-lg-0 col-lg-3">
-            <p className="text-white fs-5 mb-5">
+            <p className="text-white fs-5 mb-5 appari fw-bold">
               Il posto dove le storie diventano realtà! Qui puoi leggere,
               scrivere e condividere racconti che ti faranno emozionare, sognare
               e divertire.
@@ -142,10 +142,10 @@ const Home = ({
                   padding: "0 10px",
                 }}
               >
-                <p className="colorep fw-bold m-xl-0 m-xxl-1">
+                <p className="colorep fw-bold m-xl-0 m-xxl-1 ">
                   Inizia il tuo viaggio letterario oggi.
                 </p>
-                <p>
+                <p className="fw-bold">
                   Unisciti a JPB e trasforma le tue idee in storie
                   indimenticabili.
                 </p>
@@ -158,7 +158,7 @@ const Home = ({
         <Row>
           <Col className=" col-12 col-lg-3  d-flex flex-row-reverse flex-lg-row">
             <p
-              className="text-white text-end fs-5  ps-lg-0 mb-1 "
+              className="text-white text-end fs-5  ps-lg-0 mb-1 apparileft fw-bold "
               style={{ width: "30ch" }}
             >
               Che tu sia un lettore curioso o un autore, Jewel Paper Book è la
@@ -176,15 +176,17 @@ const Home = ({
         </Row>
       </Container>
       <Container className="m-0 mt-3 mt-md-1 mt-lg-0">
-        <Col className="col-12 col-md-3">
-          <p className="text-white fs-5">Entra, scopri nuove avventure.</p>
-          <p className="text-white text-center fs-5">
+        <Col className="col-12 col-md-3 apparidalvuoto">
+          <p className="text-white fs-5 fw-bold">
+            Entra, scopri nuove avventure.
+          </p>
+          <p className="text-white text-center fs-5 fw-bold">
             Fai sentire la tua voce!
           </p>
         </Col>
       </Container>
       <Container className="my-5">
-        <h2>I migliori</h2>
+        <h2 className="text-white">I migliori JewelPaper</h2>
         <Row className="g-3">
           {data?.slice(0, 6).map((storia) => (
             <Col

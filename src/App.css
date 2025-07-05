@@ -94,3 +94,65 @@ color: #20ADFC;
 .alertdisappear{
  animation: sparisci 3s forwards;
 }
+
+@keyframes appari{
+  0%{
+   transform: translateY(-300px);
+   opacity: 0;
+  }
+  
+  50%{
+    transform: translateY(-100px);
+    opacity: 0.5;
+  }
+ 
+  100%{
+   transform: translateY(0px);
+      opacity: 1;
+  }
+}
+
+@keyframes apparileft{
+  0%{
+   transform: translatex(-300px);
+   opacity: 0;
+  }
+  
+  50%{
+    transform: translatex(-100px);
+    opacity: 0.5;
+  }
+ 
+  100%{
+   transform: translatex(0px);
+      opacity: 1;
+    
+  }
+}
+@keyframes apparidalvuoto{
+  0%{
+   
+   opacity: 0;
+  }
+  
+  50%{
+   
+    opacity: 0.5;
+  }
+ 
+  100%{
+   
+      opacity: 1;
+
+  }
+}
+
+.appari{
+   animation: appari 2s linear;
+}
+.apparileft{
+   animation: apparileft 2s linear;
+}
+.apparidalvuoto{
+   animation: apparidalvuoto 3s linear;
+}

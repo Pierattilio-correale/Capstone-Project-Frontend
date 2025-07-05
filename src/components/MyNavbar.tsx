@@ -95,9 +95,11 @@ function MyNavbar({
         setIsError(false);
         setIsSuccess(true);
       })
-      .catch((err) => console.error(err));
-    setIsError(true);
-    setIsSuccess(false);
+      .catch((err) => {
+        console.error(err);
+        setIsError(true);
+        setIsSuccess(false);
+      });
   };
 
   const getUserIdFromToken = (): string | null => {
@@ -222,69 +224,84 @@ function MyNavbar({
             </NavDropdown>
           </Nav>
 
-          <Form className="d-flex ms-5 ms-xl-auto align-items-center">
-            <Form.Control
-              type="text"
-              placeholder="Cerca il tuo libro.."
-              className="me-2"
-            />
-            <Button className="buttonanimation me-3">Submit</Button>
+          <Form className="d-block d-lg-flex ms-0 ms-lg-5  ms-xl-auto align-items-center">
+            <div className="d-flex">
+              <Form.Control
+                type="text"
+                placeholder="Cerca il tuo libro.."
+                className="me-2 my-3 my-lg-0"
+              />
+              <div>
+                <Button className="buttonanimation me-0 my-3 my-lg-0 me-lg-3">
+                  <i className="bi bi-search"></i>
+                </Button>
+              </div>
+            </div>
 
             {!isLoggedIn ? (
               <>
-                <Button
-                  className="buttonanimation me-2"
-                  onClick={handleShowLogin}
-                >
-                  Login
-                </Button>
-                <Button
-                  className="buttonanimation"
-                  onClick={handleShowRegister}
-                >
-                  Registrazione
-                </Button>
+                <div className="d-block d-lg-flex">
+                  <Button
+                    className="buttonanimation me-2"
+                    onClick={handleShowLogin}
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    className="buttonanimation"
+                    onClick={handleShowRegister}
+                  >
+                    Registrazione
+                  </Button>
+                </div>
               </>
             ) : (
               <>
-                <NavDropdown
-                  className="mx-2"
-                  title={
-                    <img
-                      src={data?.avatar}
-                      width={40}
-                      height={40}
-                      style={{ cursor: "pointer", borderRadius: "50%" }}
-                      alt="User"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggleUserDropdown();
-                      }}
-                    />
-                  }
-                  id="user-nav-dropdown"
-                  show={showUserDropdown}
-                  onToggle={() => {}}
-                >
-                  <h4 className="mx-2">Ciao, {data?.username}</h4>
-                  <Link
-                    to={`/ProfileDetails/${data?.id}`}
-                    className="dropdown-item"
+                <div className="d-flex">
+                  <NavDropdown
+                    className="mx-2"
+                    title={
+                      <img
+                        src={data?.avatar}
+                        width={40}
+                        height={40}
+                        style={{ cursor: "pointer", borderRadius: "50%" }}
+                        alt="User"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          toggleUserDropdown();
+                        }}
+                      />
+                    }
+                    id="user-nav-dropdown"
+                    show={showUserDropdown}
+                    onToggle={() => {}}
                   >
-                    Mio profilo
-                  </Link>
-                  <NavDropdown.Item href="#action/3.2">
-                    Crea Storia
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
-                    Statistiche
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Altro</NavDropdown.Item>
-                </NavDropdown>
-                <Button className="buttonanimation" onClick={handleLogout}>
-                  Logout
-                </Button>
+                    <h4 className="mx-2">Ciao, {data?.username}</h4>
+                    <Link
+                      to={`/ProfileDetails/${data?.id}`}
+                      className="dropdown-item"
+                    >
+                      Mio profilo
+                    </Link>
+                    <NavDropdown.Item href="#action/3.2">
+                      Crea Storia
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3">
+                      Statistiche
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action/3.4">
+                      Altro
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                  <Button
+                    className="buttonanimation ms-2 ms-lg-0"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                </div>
               </>
             )}
           </Form>

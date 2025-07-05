@@ -12,6 +12,15 @@ import {
 import { useParams } from "react-router-dom";
 
 const ProfileDetails = () => {
+  interface User {
+    id: number;
+    nome: string;
+    cognome: string;
+    username: string;
+    email: string;
+    dataNascita: string;
+    avatar: string;
+  }
   const params = useParams();
   console.log(params);
   const [data, setData] = useState<any>(null);
@@ -76,17 +85,14 @@ const ProfileDetails = () => {
                       <i className="bi bi-patch-check-fill text-primary"></i>
                     </h4>
                     <p className="text-primary fw-semibold mb-0">
-                      {Math.floor(Math.random() * 100) + 20} collegamenti
+                      {Math.floor(Math.random() * 100) + 20} letture
                     </p>
                   </div>
                 </div>
 
                 <div className="d-flex flex-wrap gap-2 mt-3">
-                  <Button variant="primary" className="rounded-pill">
-                    Disponibile per
-                  </Button>
                   <Button variant="outline-primary" className="rounded-pill">
-                    Aggiungi sezione del profilo
+                    Crea Storia
                   </Button>
                   <Button variant="outline-primary" className="rounded-pill">
                     Migliora profilo
@@ -95,24 +101,25 @@ const ProfileDetails = () => {
                     Altro
                   </Button>
                 </div>
-
                 <div className="d-flex mt-4 flex-wrap gap-3 ">
-                  <div className="flex-grow-1 flex-basis-0 p-3 border rounded bg-light">
-                    <strong>Disponibile a lavorare</strong>
-                    <p className="mb-1 small text-muted">{data?.username}</p>
-                    <a href="#" className="text-primary small">
-                      Mostra dettagli
-                    </a>
+                  <div className="flex-grow-1 flex-basis-0 p-2 border rounded bg-light">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>
+                        <strong>{data?.username}</strong>
+                      </div>
+
+                      <div className="d-flex">
+                        <button className="btn fs-4">
+                          <i className="bi bi-pencil"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div>ciao</div>
                   </div>
 
                   <div className="flex-grow-1 flex-basis-0 p-3 border rounded bg-light ">
-                    <p className="mb-1 small">
-                      Fai sapere che stai facendo selezione e attrai candidati
-                      qualificati.
-                    </p>
-                    <a href="#" className="text-primary small">
-                      Inizia
-                    </a>
+                    <p className="mb-1 small"></p>
+                    <a href="#" className="text-primary small"></a>
                   </div>
                 </div>
               </div>
