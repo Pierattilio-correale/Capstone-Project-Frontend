@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import MyFooter from "./components/MyFooter";
 import ProfileDetails from "./components/ProfileDetails";
 import { useState } from "react";
+import HomeLogged from "./components/HomeLogged";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -42,6 +43,7 @@ function App() {
                 }
                 path="/"
               />
+              <Route element={<HomeLogged />} path="/home" />
               <Route
                 element={<ProfileDetails />}
                 path="/ProfileDetails/:profileId"

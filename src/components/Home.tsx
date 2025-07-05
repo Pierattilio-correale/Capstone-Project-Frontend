@@ -185,10 +185,10 @@ const Home = ({
       </Container>
       <Container className="my-5">
         <h2>I migliori</h2>
-        <Row className="g-1">
+        <Row className="g-3">
           {data?.slice(0, 6).map((storia) => (
             <Col
-              className="col-lg-3 col-md-4 col-sm-6 col-xl-2 col-12 "
+              className="col-lg-3 col-md-4 col-sm-6 col-xl-2  "
               key={storia.id}
             >
               <Card className="d-flex flex-column h-100">
