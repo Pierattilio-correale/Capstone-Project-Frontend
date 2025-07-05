@@ -7,6 +7,7 @@ import {
   Nav,
   Navbar,
   NavDropdown,
+  Alert,
 } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
@@ -53,6 +54,8 @@ function MyNavbar({
   const [dataNascita, setDataNascita] = useState("");
   const [data, setData] = useState<User | null>(null);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const navigate = useNavigate();
 
@@ -89,8 +92,12 @@ function MyNavbar({
       .then((data) => {
         console.log("Registrazione avvenuta:", data);
         handleCloseRegister();
+        setIsError(false);
+        setIsSuccess(true);
       })
       .catch((err) => console.error(err));
+    setIsError(true);
+    setIsSuccess(false);
   };
 
   const getUserIdFromToken = (): string | null => {
@@ -146,9 +153,11 @@ function MyNavbar({
         handleCloseLogin();
         utenteLoggato();
         navigate("/home");
+        setIsError(false);
       })
       .catch((err) => {
         console.error("Errore nella promise:", err);
+        setIsError(true);
       });
   };
 
@@ -163,6 +172,15 @@ function MyNavbar({
   const toggleUserDropdown = () => {
     setShowUserDropdown((prev) => !prev);
   };
+  useEffect(() => {
+    if (isError || isSuccess) {
+      const timer = setTimeout(() => {
+        setIsError(false);
+        setIsSuccess(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isError, isSuccess]);
 
   return (
     <Navbar
@@ -314,13 +332,24 @@ function MyNavbar({
                 required
               />
             </Form.Group>
+            {isError && (
+              <Alert variant="danger" className="alertdisappear">
+                Password, email o username non corretto
+              </Alert>
+            )}{" "}
             <Button variant="primary" type="submit">
               Accedi
             </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseLogin}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setIsError(false);
+              handleCloseLogin();
+            }}
+          >
             Chiudi
           </Button>
         </Modal.Footer>
@@ -403,6 +432,11 @@ function MyNavbar({
             <Button variant="primary" type="submit">
               Registrati
             </Button>
+            {isError && (
+              <Alert variant="danger" className="alertdisappear">
+                username o email già presente nel sistema
+              </Alert>
+            )}{" "}
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -411,6 +445,11 @@ function MyNavbar({
           </Button>
         </Modal.Footer>
       </Modal>
+      {isSuccess && (
+        <Alert variant="success" className="alertdisappear">
+          registrazione effettuata con successo
+        </Alert>
+      )}
     </Navbar>
   );
 }
