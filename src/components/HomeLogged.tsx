@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const HomeLogged = () => {
   interface User {
@@ -21,6 +22,7 @@ const HomeLogged = () => {
     autore: User;
   }
   const [data, setData] = useState<Storia[]>([]);
+  const navigate = useNavigate();
   const fetchStorieIniziali = () => {
     fetch("http://localhost:8080/storie")
       .then((response) => {
@@ -61,7 +63,12 @@ const HomeLogged = () => {
                   }}
                 >
                   <Card.Title>{storia.titolo}</Card.Title>
-                  <Card.Text className="flex-grow-1">
+                  <Card.Text
+                    className="flex-grow-1"
+                    onClick={() =>
+                      navigate("/ProfileDetails/" + storia?.autore.id)
+                    }
+                  >
                     {storia.autore.username}
                   </Card.Text>
                   <Button variant="dark">Leggi!</Button>
@@ -74,7 +81,7 @@ const HomeLogged = () => {
       <Container className="my-5">
         <h2 className="text-white">Novità del momento</h2>
         <Row className="g-1">
-          {data?.slice(7, 12).map((storia) => (
+          {data?.slice(6, 12).map((storia) => (
             <Col
               className="col-lg-3 col-md-4 col-sm-6 col-xl-2  "
               key={storia.id}
@@ -92,7 +99,12 @@ const HomeLogged = () => {
                   }}
                 >
                   <Card.Title>{storia.titolo}</Card.Title>
-                  <Card.Text className="flex-grow-1">
+                  <Card.Text
+                    className="flex-grow-1"
+                    onClick={() =>
+                      navigate("/ProfileDetails/" + storia?.autore.id)
+                    }
+                  >
                     {storia.autore.username}
                   </Card.Text>
                   <Button variant="dark">Leggi!</Button>
@@ -105,7 +117,7 @@ const HomeLogged = () => {
       <Container className="my-5">
         <h2 className="text-white">Romance</h2>
         <Row className="g-1">
-          {data?.slice(13, 18).map((storia) => (
+          {data?.slice(12, 18).map((storia) => (
             <Col
               className="col-lg-3 col-md-4 col-sm-6 col-xl-2  "
               key={storia.id}
@@ -123,7 +135,12 @@ const HomeLogged = () => {
                   }}
                 >
                   <Card.Title>{storia.titolo}</Card.Title>
-                  <Card.Text className="flex-grow-1">
+                  <Card.Text
+                    className="flex-grow-1"
+                    onClick={() =>
+                      navigate("/ProfileDetails/" + storia?.autore.id)
+                    }
+                  >
                     {storia.autore.username}
                   </Card.Text>
                   <Button variant="dark">Leggi!</Button>

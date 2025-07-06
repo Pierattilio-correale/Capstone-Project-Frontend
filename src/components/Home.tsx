@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 interface HomeProps {
   handleCloseLogin: () => void;
@@ -33,6 +34,7 @@ const Home = ({
   }
 
   const [data, setData] = useState<Storia[]>([]);
+  const navigate = useNavigate();
 
   const fetchStorieIniziali = () => {
     fetch("http://localhost:8080/storie")
@@ -206,7 +208,12 @@ const Home = ({
                   }}
                 >
                   <Card.Title>{storia.titolo}</Card.Title>
-                  <Card.Text className="flex-grow-1">
+                  <Card.Text
+                    className="flex-grow-1"
+                    onClick={() =>
+                      navigate("/ProfileDetails/" + storia?.autore.id)
+                    }
+                  >
                     {storia.autore.username}
                   </Card.Text>
                   <Button variant="dark">Leggi!</Button>

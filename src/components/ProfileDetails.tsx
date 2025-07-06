@@ -21,9 +21,17 @@ const ProfileDetails = () => {
     dataNascita: string;
     avatar: string;
   }
+  interface Storia {
+    id: number;
+    titolo: string;
+    descrizione: string;
+    dataCreazione: string;
+    immagineCopertina: string;
+    autore: User;
+  }
   const params = useParams();
   console.log(params);
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<(User & { storie: Storia[] }) | null>(null);
 
   const fecthProfile = () => {
     fetch(`http://localhost:8080/users/${params.profileId}`, {
@@ -53,7 +61,7 @@ const ProfileDetails = () => {
     <>
       <Container className="my-4">
         <Row className="d-flex justify-content-center">
-          <Col className="col-11">
+          <Col className="col-11 ">
             <div className="bg-white shadow-sm mb-4  rounded w-responsive">
               <div style={{ height: "200px", overflow: "hidden" }}>
                 <img
@@ -101,8 +109,8 @@ const ProfileDetails = () => {
                     Altro
                   </Button>
                 </div>
-                <div className="d-flex mt-4 flex-wrap gap-3 ">
-                  <div className="flex-grow-1 flex-basis-0 p-2 border rounded bg-light">
+                <div className="d-block d-md-flex  mt-4  gap-3 align-items-start">
+                  <div className="flex-basis-0 p-2 border rounded bg-light">
                     <div className="d-flex justify-content-between align-items-center">
                       <div>
                         <strong>{data?.username}</strong>
@@ -114,12 +122,23 @@ const ProfileDetails = () => {
                         </button>
                       </div>
                     </div>
-                    <div>ciao</div>
+                    <div>ciaoooooooooooooooooooooooooooooooooooooooooo</div>
                   </div>
 
-                  <div className="flex-grow-1 flex-basis-0 p-3 border rounded bg-light ">
-                    <p className="mb-1 small"></p>
-                    <a href="#" className="text-primary small"></a>
+                  <div className="flex-grow-1  p-3 border rounded bg-light my-5 my-md-0 ">
+                    {data?.storie?.map((storie) => (
+                      <Col className="col-12 my-3" key={storie.id}>
+                        <div className="d-flex">
+                          <img
+                            className="img-fluid"
+                            src={storie.immagineCopertina}
+                            width={100}
+                            height={100}
+                          />
+                          <h5 className="ms-3">{storie.titolo}</h5>
+                        </div>
+                      </Col>
+                    ))}
                   </div>
                 </div>
               </div>
