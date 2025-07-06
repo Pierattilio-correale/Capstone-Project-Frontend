@@ -109,7 +109,7 @@ const ProfileDetails = () => {
                     Altro
                   </Button>
                 </div>
-                <div className="d-block d-md-flex  mt-4  gap-3 align-items-start">
+                <div className="d-block d-lg-flex  mt-4  gap-3 align-items-start ">
                   <div className="flex-basis-0 p-2 border rounded bg-light">
                     <div className="d-flex justify-content-between align-items-center">
                       <div>
@@ -122,20 +122,28 @@ const ProfileDetails = () => {
                         </button>
                       </div>
                     </div>
-                    <div>ciaoooooooooooooooooooooooooooooooooooooooooo</div>
+                    <div className=" ">
+                      ciaoooooooooooooooooooooooooooooooooooooooooo
+                    </div>
                   </div>
 
-                  <div className="flex-grow-1  p-3 border rounded bg-light my-5 my-md-0 ">
+                  <div className="flex-grow-1  p-3 border rounded bg-light my-5 my-lg-0 ">
                     {data?.storie?.map((storie) => (
                       <Col className="col-12 my-3" key={storie.id}>
-                        <div className="d-flex">
+                        <h5 className="d-md-none">{storie.titolo}</h5>
+                        <div className="d-block d-md-flex">
                           <img
                             className="img-fluid"
                             src={storie.immagineCopertina}
                             width={100}
                             height={100}
                           />
-                          <h5 className="ms-3">{storie.titolo}</h5>
+                          <div className="ms-0 ms-md-3 my-2 my-md-0 d-flex flex-column">
+                            <h5 className="d-none d-md-block">
+                              {storie.titolo}
+                            </h5>
+                            <p>{storie.descrizione}</p>
+                          </div>
                         </div>
                       </Col>
                     ))}
