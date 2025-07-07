@@ -8,10 +8,16 @@ import {
   FormGroup,
   FormLabel,
   Form,
+  Modal,
 } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProfileDetails = () => {
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   interface User {
     id: number;
     nome: string;
@@ -31,8 +37,14 @@ const ProfileDetails = () => {
     autore: User;
   }
   const params = useParams();
-  console.log(params);
+
   const [data, setData] = useState<(User & { storie: Storia[] }) | null>(null);
+  const [postStoria, setPostStoria] = useState<{ storie: Storia[] } | null>(
+    null
+  );
+  const [titolo, setTitolo] = useState("");
+  const [descrizione, setDescrizione] = useState("");
+  const [genere, setGenere] = useState("");
 
   const fecthProfile = () => {
     fetch(`http://localhost:8080/users/${params.profileId}`, {
@@ -57,6 +69,36 @@ const ProfileDetails = () => {
       fecthProfile();
     }
   }, [params.profileId]);
+
+  const CreaStoria = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const body = { titolo, descrizione, genere, userId: data?.id };
+    fetch(`http://localhost:8080/storie`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      method: "POST",
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore nella risposta del server");
+        }
+        return response.json();
+      })
+      .then((postStoria) => {
+        console.log(postStoria);
+        handleClose();
+        setTitolo("");
+        setDescrizione("");
+        setGenere("");
+        fecthProfile();
+      })
+      .catch((err) => {
+        console.log("errore nella fetch ", err);
+      });
+  };
 
   return (
     <>
@@ -130,7 +172,74 @@ const ProfileDetails = () => {
                   </div>
 
                   <div className="p-3 border rounded  my-5 my-lg-0">
-                    <h3 className="mb-5">Le tue Storie</h3>
+                    <h3 className="mb-3">Le tue Storie</h3>
+                    <div className="d-flex justify-content-between mb-5 text-primary align-items-center">
+                      Aggiungi nuova storia
+                      <div>
+                        <Button
+                          variant="link"
+                          className="text-dark p-0"
+                          onClick={handleShow}
+                        >
+                          <i className="bi bi-plus-lg fs-3"></i>
+                        </Button>
+                      </div>
+                    </div>
+                    <Modal show={showModal} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Aggiungi la tua storia!</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Form onSubmit={CreaStoria}>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Titolo</Form.Label>
+                            <Form.Control
+                              type="text"
+                              value={titolo}
+                              onChange={(e) => {
+                                setTitolo(e.target.value);
+                              }}
+                              required
+                            />
+                          </Form.Group>
+
+                          <Form.Group className="mb-3">
+                            <Form.Label>Genere</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Romance"
+                              value={genere}
+                              onChange={(e) => {
+                                setGenere(e.target.value);
+                              }}
+                              required
+                            />
+                          </Form.Group>
+
+                          <Form.Group
+                            className="mb-3"
+                            controlId="exampleForm.ControlTextarea1"
+                          >
+                            <Form.Label>Descrizione</Form.Label>
+                            <Form.Control
+                              as="textarea"
+                              rows={3}
+                              value={descrizione}
+                              onChange={(e) => {
+                                setDescrizione(e.target.value);
+                              }}
+                            />
+                          </Form.Group>
+                          <Button
+                            className="btn btn-primary rounded-5 pt-1 px-3"
+                            type="submit"
+                          >
+                            Save
+                          </Button>
+                        </Form>
+                      </Modal.Body>
+                      <Modal.Footer></Modal.Footer>
+                    </Modal>
                     {data?.storie?.map((storie) => (
                       <Col className="col-12 my-3" key={storie.id}>
                         <div className="d-flex justify-content-between">
