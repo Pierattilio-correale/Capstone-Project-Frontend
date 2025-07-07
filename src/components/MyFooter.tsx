@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 const MyFooter = () => {
   return (
     <>
-      <Container className="mt-5 pt-5">
+      <Container className="mt-5 pt-5 text-center">
         <Row className=" d-flex justify-content-center">
           <Col className="col-12 col-md-2">
             <p>

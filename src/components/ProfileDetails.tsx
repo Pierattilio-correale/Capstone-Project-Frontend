@@ -20,6 +20,7 @@ const ProfileDetails = () => {
     email: string;
     dataNascita: string;
     avatar: string;
+    descrizione: string;
   }
   interface Storia {
     id: number;
@@ -59,9 +60,9 @@ const ProfileDetails = () => {
 
   return (
     <>
-      <Container className="my-4">
+      <Container className="my-4 ">
         <Row className="d-flex justify-content-center">
-          <Col className="col-11 ">
+          <Col className="col-12  ">
             <div className="bg-white shadow-sm mb-4  rounded w-responsive">
               <div style={{ height: "200px", overflow: "hidden" }}>
                 <img
@@ -110,7 +111,8 @@ const ProfileDetails = () => {
                   </Button>
                 </div>
                 <div className="d-block d-lg-flex  mt-4  gap-3 align-items-start ">
-                  <div className="flex-basis-0 p-2 border rounded bg-light">
+                  <div className="p-2 border rounded bg-light w-100">
+                    <h3>Descrizione</h3>
                     <div className="d-flex justify-content-between align-items-center">
                       <div>
                         <strong>{data?.username}</strong>
@@ -122,15 +124,22 @@ const ProfileDetails = () => {
                         </button>
                       </div>
                     </div>
-                    <div className=" ">
-                      ciaoooooooooooooooooooooooooooooooooooooooooo
+                    <div className="text-break">
+                      <p>{data?.descrizione}</p>
                     </div>
                   </div>
 
-                  <div className="flex-grow-1  p-3 border rounded bg-light my-5 my-lg-0 ">
+                  <div className="p-3 border rounded  my-5 my-lg-0">
+                    <h3 className="mb-5">Le tue Storie</h3>
                     {data?.storie?.map((storie) => (
                       <Col className="col-12 my-3" key={storie.id}>
-                        <h5 className="d-md-none">{storie.titolo}</h5>
+                        <div className="d-flex justify-content-between">
+                          <h5 className="d-md-none">{storie.titolo}</h5>
+                          <button className="d-md-none btn fs-4 p-0">
+                            <i className="bi bi-pencil"></i>
+                          </button>
+                        </div>
+
                         <div className="d-block d-md-flex">
                           <img
                             className="img-fluid"
@@ -138,11 +147,25 @@ const ProfileDetails = () => {
                             width={100}
                             height={100}
                           />
-                          <div className="ms-0 ms-md-3 my-2 my-md-0 d-flex flex-column">
-                            <h5 className="d-none d-md-block">
-                              {storie.titolo}
-                            </h5>
-                            <p>{storie.descrizione}</p>
+
+                          <div className="ms-0 ms-md-3 my-2 my-md-0 d-flex flex-column flex-grow-1">
+                            <div className="d-flex justify-content-between align-items-start w-100">
+                              <h5 className="d-none d-md-block mb-0">
+                                {storie.titolo}
+                              </h5>
+                              <button className="d-none d-md-block btn fs-4 p-0">
+                                <i className="bi bi-pencil"></i>
+                              </button>
+                            </div>
+
+                            {storie.descrizione ? (
+                              <p className="mt-2 mb-0">{storie.descrizione}</p>
+                            ) : (
+                              <div
+                                className="mt-2"
+                                style={{ minHeight: "1.5rem" }}
+                              ></div>
+                            )}
                           </div>
                         </div>
                       </Col>
