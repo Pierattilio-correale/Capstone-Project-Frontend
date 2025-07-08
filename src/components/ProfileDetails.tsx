@@ -77,6 +77,8 @@ const ProfileDetails = () => {
   const [descrizione, setDescrizione] = useState("");
   const [descrizioneUser, setDescrizioneUser] = useState("");
   const [genere, setGenere] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   const fecthProfile = () => {
     fetch(`http://localhost:8080/users/${params.profileId}`, {
@@ -186,6 +188,47 @@ const ProfileDetails = () => {
       });
   };
 
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+    }
+  };
+
+  const handleImageUpload = () => {
+    if (!selectedImage) return;
+
+    const formData = new FormData();
+    formData.append("file", selectedImage);
+    setUploading(true);
+
+    fetch(`http://localhost:8080/users/${params.profileId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      method: "PATCH",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore nella richiesta");
+        }
+        return response.text();
+      })
+      .then((data) => {
+        console.log("Avatar aggiornato:", data);
+        setUploading(false);
+        fecthProfile();
+        setSelectedImage(null);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error("Errore nel caricamento immagine:", err);
+        setUploading(false);
+      });
+  };
   return (
     <>
       <Container className="my-4 ">
@@ -227,20 +270,48 @@ const ProfileDetails = () => {
                   </div>
                 </div>
                 {isOwner && (
-                  <div className="d-flex flex-wrap gap-2 mt-3">
-                    <Button variant="outline-primary" className="rounded-pill">
-                      Crea Storia
-                    </Button>
-                    <Button variant="outline-primary" className="rounded-pill">
-                      Migliora profilo
-                    </Button>
-                    <Button
-                      variant="outline-secondary"
-                      className="rounded-pill"
-                    >
-                      Altro
-                    </Button>
-                  </div>
+                  <>
+                    <div className="mt-3 w-25">
+                      <Form.Group controlId="formFile" className="mb-2">
+                        <Form.Label>
+                          Carica una nuova immagine profilo
+                        </Form.Label>
+                        <Form.Control
+                          type="file"
+                          onChange={handleFileChange}
+                          disabled={uploading}
+                        />
+                      </Form.Group>
+                      <Button
+                        variant="outline-primary"
+                        className="rounded-pill"
+                        onClick={handleImageUpload}
+                        disabled={uploading || !selectedImage}
+                      >
+                        {uploading ? "Caricamento..." : "Carica"}
+                      </Button>
+                    </div>
+                    <div className="d-flex flex-wrap gap-2 mt-3">
+                      <Button
+                        variant="outline-primary"
+                        className="rounded-pill"
+                      >
+                        Crea Storia
+                      </Button>
+                      <Button
+                        variant="outline-primary"
+                        className="rounded-pill"
+                      >
+                        Migliora profilo
+                      </Button>
+                      <Button
+                        variant="outline-secondary"
+                        className="rounded-pill"
+                      >
+                        Altro
+                      </Button>
+                    </div>
+                  </>
                 )}
 
                 <div className="d-block d-lg-flex  mt-4  gap-3 align-items-start ">
@@ -294,7 +365,9 @@ const ProfileDetails = () => {
                     <Modal.Footer></Modal.Footer>
                   </Modal>
                   <div className="p-3 border rounded  my-5 my-lg-0 larghezzaminima ">
-                    <h3 className="mb-3">Le tue Storie</h3>
+                    <h3 className="mb-3">
+                      {isOwner ? "Le tue Storie" : "Le sue Storie"}
+                    </h3>
                     {isOwner && (
                       <div
                         className="d-flex justify-content-between mb-5 text-primary align-items-center"
