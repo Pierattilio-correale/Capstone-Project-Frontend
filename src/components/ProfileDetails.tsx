@@ -29,10 +29,18 @@ const ProfileDetails = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
+  const [showModalModificaStoria, setShowModalModificaStoria] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+  const handleCloseModificaStoria = () => setShowModalModificaStoria(false);
+  const handleShowModificaStoria = () => setShowModalModificaStoria(true);
   const handleCloseUser = () => setShowModalUser(false);
-  const handleShowUser = () => setShowModalUser(true);
+  const handleShowUser = () => {
+    if (data?.descrizione) {
+      setDescrizioneUser(data.descrizione);
+    }
+    setShowModalUser(true);
+  };
 
   interface User {
     id: number;
@@ -48,6 +56,7 @@ const ProfileDetails = () => {
     id: number;
     titolo: string;
     descrizione: string;
+    genere: string;
     dataCreazione: string;
     immagineCopertina: string;
     autore: User;
@@ -56,6 +65,9 @@ const ProfileDetails = () => {
 
   const [data, setData] = useState<(User & { storie: Storia[] }) | null>(null);
   const [postStoria, setPostStoria] = useState<{ storie: Storia[] } | null>(
+    null
+  );
+  const [storiaSelezionata, setStoriaSelezionata] = useState<Storia | null>(
     null
   );
   const [titolo, setTitolo] = useState("");
@@ -138,6 +150,32 @@ const ProfileDetails = () => {
         console.log(patchDescrizione);
         handleCloseUser();
         setDescrizioneUser("");
+        fecthProfile();
+      })
+      .catch((err) => {
+        console.log("errore nella fetch ", err);
+      });
+  };
+  const modificaStoria = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const body = { titolo, descrizione, genere, userId: data?.id };
+    fetch(`http://localhost:8080/storie/${storiaSelezionata?.id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      method: "PUT",
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore nella risposta del server");
+        }
+        return response.json();
+      })
+      .then((putStoria) => {
+        console.log(putStoria);
+        handleCloseModificaStoria();
         fecthProfile();
       })
       .catch((err) => {
@@ -317,11 +355,68 @@ const ProfileDetails = () => {
                       </Modal.Body>
                       <Modal.Footer></Modal.Footer>
                     </Modal>
+                    <Modal
+                      show={showModalModificaStoria}
+                      onHide={handleCloseModificaStoria}
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title>Modifica la tua storia</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Form onSubmit={modificaStoria}>
+                          <Form.Group className="mb-3">
+                            <Form.Label>Titolo</Form.Label>
+                            <Form.Control
+                              type="text"
+                              value={titolo}
+                              onChange={(e) => setTitolo(e.target.value)}
+                              required
+                            />
+                          </Form.Group>
+
+                          <Form.Group className="mb-3">
+                            <Form.Label>Genere</Form.Label>
+                            <Form.Control
+                              type="text"
+                              value={genere}
+                              onChange={(e) => setGenere(e.target.value)}
+                              required
+                            />
+                          </Form.Group>
+
+                          <Form.Group className="mb-3">
+                            <Form.Label>Descrizione</Form.Label>
+                            <Form.Control
+                              as="textarea"
+                              rows={5}
+                              value={descrizione}
+                              onChange={(e) => setDescrizione(e.target.value)}
+                            />
+                          </Form.Group>
+
+                          <Button
+                            type="submit"
+                            className="btn btn-primary rounded-5 pt-1 px-3"
+                          >
+                            Salva modifiche
+                          </Button>
+                        </Form>
+                      </Modal.Body>
+                    </Modal>
                     {data?.storie?.map((storie) => (
                       <Col className="col-12 my-3" key={storie.id}>
                         <div className="d-flex justify-content-between">
                           <h5 className="d-md-none">{storie.titolo}</h5>
-                          <button className="d-md-none btn fs-4 p-0">
+                          <button
+                            className="d-md-none btn fs-4 p-0"
+                            onClick={() => {
+                              setStoriaSelezionata(storie);
+                              setTitolo(storie.titolo);
+                              setDescrizione(storie.descrizione);
+                              setGenere(storie.genere);
+                              handleShowModificaStoria();
+                            }}
+                          >
                             <i className="bi bi-pencil"></i>
                           </button>
                         </div>
@@ -339,7 +434,16 @@ const ProfileDetails = () => {
                               <h5 className="d-none d-md-block mb-0">
                                 {storie.titolo}
                               </h5>
-                              <button className="d-none d-md-block btn fs-4 p-0">
+                              <button
+                                className="d-none d-md-block btn fs-4 p-0"
+                                onClick={() => {
+                                  setStoriaSelezionata(storie);
+                                  setTitolo(storie.titolo);
+                                  setDescrizione(storie.descrizione);
+                                  setGenere(storie.genere);
+                                  handleShowModificaStoria();
+                                }}
+                              >
                                 <i className="bi bi-pencil"></i>
                               </button>
                             </div>
@@ -356,7 +460,7 @@ const ProfileDetails = () => {
                             )}
                             <div className="mt-auto ">
                               <Button variant="dark">Leggi</Button>{" "}
-                              <Button variant="dark">Aggiungi Capitoli</Button>
+                              {/* <Button variant="dark">Aggiungi Capitoli</Button> */}
                             </div>
                           </div>
                         </div>
