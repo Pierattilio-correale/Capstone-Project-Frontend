@@ -169,6 +169,7 @@ function MyNavbar({
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setIsLoggedIn(false);
     setShowUserDropdown(false);
     setData(null);
