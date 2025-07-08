@@ -62,6 +62,9 @@ const ProfileDetails = () => {
     autore: User;
   }
   const params = useParams();
+  const loggedUserId = localStorage.getItem("userId");
+
+  const isOwner = loggedUserId === params.profileId;
 
   const [data, setData] = useState<(User & { storie: Storia[] }) | null>(null);
   const [postStoria, setPostStoria] = useState<{ storie: Storia[] } | null>(
@@ -223,18 +226,23 @@ const ProfileDetails = () => {
                     </p>
                   </div>
                 </div>
+                {isOwner && (
+                  <div className="d-flex flex-wrap gap-2 mt-3">
+                    <Button variant="outline-primary" className="rounded-pill">
+                      Crea Storia
+                    </Button>
+                    <Button variant="outline-primary" className="rounded-pill">
+                      Migliora profilo
+                    </Button>
+                    <Button
+                      variant="outline-secondary"
+                      className="rounded-pill"
+                    >
+                      Altro
+                    </Button>
+                  </div>
+                )}
 
-                <div className="d-flex flex-wrap gap-2 mt-3">
-                  <Button variant="outline-primary" className="rounded-pill">
-                    Crea Storia
-                  </Button>
-                  <Button variant="outline-primary" className="rounded-pill">
-                    Migliora profilo
-                  </Button>
-                  <Button variant="outline-secondary" className="rounded-pill">
-                    Altro
-                  </Button>
-                </div>
                 <div className="d-block d-lg-flex  mt-4  gap-3 align-items-start ">
                   <div className="p-2 border rounded bg-light w-100">
                     <h3>Descrizione</h3>
@@ -244,9 +252,11 @@ const ProfileDetails = () => {
                       </div>
 
                       <div className="d-flex">
-                        <button className="btn fs-4" onClick={handleShowUser}>
-                          <i className="bi bi-pencil"></i>
-                        </button>
+                        {isOwner && (
+                          <button className="btn fs-4" onClick={handleShowUser}>
+                            <i className="bi bi-pencil"></i>
+                          </button>
+                        )}
                       </div>
                     </div>
                     <div className="text-break">
@@ -285,21 +295,24 @@ const ProfileDetails = () => {
                   </Modal>
                   <div className="p-3 border rounded  my-5 my-lg-0 larghezzaminima ">
                     <h3 className="mb-3">Le tue Storie</h3>
-                    <div
-                      className="d-flex justify-content-between mb-5 text-primary align-items-center"
-                      onClick={handleShow}
-                    >
-                      Aggiungi nuova storia
-                      <div>
-                        <Button
-                          variant="link"
-                          className="text-dark p-0"
-                          onClick={handleShow}
-                        >
-                          <i className="bi bi-plus-lg fs-3"></i>
-                        </Button>
+                    {isOwner && (
+                      <div
+                        className="d-flex justify-content-between mb-5 text-primary align-items-center"
+                        onClick={handleShow}
+                      >
+                        Aggiungi nuova storia
+                        <div>
+                          <Button
+                            variant="link"
+                            className="text-dark p-0"
+                            onClick={handleShow}
+                          >
+                            <i className="bi bi-plus-lg fs-3"></i>
+                          </Button>
+                        </div>
                       </div>
-                    </div>
+                    )}
+
                     <Modal show={showModal} onHide={handleClose}>
                       <Modal.Header closeButton>
                         <Modal.Title>Aggiungi la tua storia!</Modal.Title>
@@ -407,18 +420,20 @@ const ProfileDetails = () => {
                       <Col className="col-12 my-3" key={storie.id}>
                         <div className="d-flex justify-content-between">
                           <h5 className="d-md-none">{storie.titolo}</h5>
-                          <button
-                            className="d-md-none btn fs-4 p-0"
-                            onClick={() => {
-                              setStoriaSelezionata(storie);
-                              setTitolo(storie.titolo);
-                              setDescrizione(storie.descrizione);
-                              setGenere(storie.genere);
-                              handleShowModificaStoria();
-                            }}
-                          >
-                            <i className="bi bi-pencil"></i>
-                          </button>
+                          {isOwner && (
+                            <button
+                              className="d-md-none btn fs-4 p-0"
+                              onClick={() => {
+                                setStoriaSelezionata(storie);
+                                setTitolo(storie.titolo);
+                                setDescrizione(storie.descrizione);
+                                setGenere(storie.genere);
+                                handleShowModificaStoria();
+                              }}
+                            >
+                              <i className="bi bi-pencil"></i>
+                            </button>
+                          )}
                         </div>
 
                         <div className="d-block d-md-flex">
@@ -434,18 +449,20 @@ const ProfileDetails = () => {
                               <h5 className="d-none d-md-block mb-0">
                                 {storie.titolo}
                               </h5>
-                              <button
-                                className="d-none d-md-block btn fs-4 p-0"
-                                onClick={() => {
-                                  setStoriaSelezionata(storie);
-                                  setTitolo(storie.titolo);
-                                  setDescrizione(storie.descrizione);
-                                  setGenere(storie.genere);
-                                  handleShowModificaStoria();
-                                }}
-                              >
-                                <i className="bi bi-pencil"></i>
-                              </button>
+                              {isOwner && (
+                                <button
+                                  className="d-none d-md-block btn fs-4 p-0"
+                                  onClick={() => {
+                                    setStoriaSelezionata(storie);
+                                    setTitolo(storie.titolo);
+                                    setDescrizione(storie.descrizione);
+                                    setGenere(storie.genere);
+                                    handleShowModificaStoria();
+                                  }}
+                                >
+                                  <i className="bi bi-pencil"></i>
+                                </button>
+                              )}
                             </div>
 
                             {storie.descrizione ? (
@@ -460,7 +477,11 @@ const ProfileDetails = () => {
                             )}
                             <div className="mt-auto ">
                               <Button variant="dark">Leggi</Button>{" "}
-                              {/* <Button variant="dark">Aggiungi Capitoli</Button> */}
+                              {isOwner && (
+                                <Button variant="dark">
+                                  Aggiungi Capitoli
+                                </Button>
+                              )}
                             </div>
                           </div>
                         </div>

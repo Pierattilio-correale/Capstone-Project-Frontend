@@ -151,6 +151,10 @@ function MyNavbar({
       })
       .then((token) => {
         localStorage.setItem("token", token);
+        const decoded = jwtDecode<JwtPayload>(token);
+        if (decoded?.sub) {
+          localStorage.setItem("userId", decoded.sub);
+        }
         setIsLoggedIn(true);
         handleCloseLogin();
         utenteLoggato();
