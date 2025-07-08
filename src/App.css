@@ -160,3 +160,8 @@ color: #20ADFC;
   cursor: pointer;
 }
 
+@media (min-width: 994px) {
+  .larghezzaminima {
+    min-width: 600px !important;
+  }
+}

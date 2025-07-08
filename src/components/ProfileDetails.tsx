@@ -245,7 +245,7 @@ const ProfileDetails = () => {
                     </Modal.Body>
                     <Modal.Footer></Modal.Footer>
                   </Modal>
-                  <div className="p-3 border rounded  my-5 my-lg-0 minima ">
+                  <div className="p-3 border rounded  my-5 my-lg-0 larghezzaminima ">
                     <h3 className="mb-3">Le tue Storie</h3>
                     <div
                       className="d-flex justify-content-between mb-5 text-primary align-items-center"
