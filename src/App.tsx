@@ -8,6 +8,9 @@ import MyFooter from "./components/MyFooter";
 import ProfileDetails from "./components/ProfileDetails";
 import { useState } from "react";
 import HomeLogged from "./components/HomeLogged";
+import BookDetails from "./components/BookDetails";
+import CreazioneCapitolo from "./components/CreazioneCapitolo";
+import CapitoloDetails from "./components/CapitoloDetails";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -45,6 +48,15 @@ function App() {
               <Route
                 element={<ProfileDetails />}
                 path="/ProfileDetails/:profileId"
+              />
+              <Route element={<BookDetails />} path="/BookDetails/:bookId" />
+              <Route
+                element={<CreazioneCapitolo />}
+                path="/BookDetails/:bookId/CapitoliDetails/Creation"
+              />
+              <Route
+                element={<CapitoloDetails />}
+                path="/CapitoloDetails/:capitoloId"
               />
             </Routes>
           </main>

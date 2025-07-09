@@ -216,7 +216,12 @@ const Home = ({
                   >
                     {storia.autore.username}
                   </Card.Text>
-                  <Button variant="dark">Leggi!</Button>
+                  <Button
+                    variant="dark"
+                    onClick={() => navigate("/BookDetails/" + storia?.id)}
+                  >
+                    Leggi!
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>

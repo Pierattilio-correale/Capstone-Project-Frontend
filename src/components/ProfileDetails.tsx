@@ -549,9 +549,22 @@ const ProfileDetails = () => {
                               ></div>
                             )}
                             <div className="mt-auto ">
-                              <Button variant="dark">Leggi</Button>{" "}
+                              <Button
+                                className="me-2"
+                                variant="dark"
+                                onClick={() =>
+                                  navigate("/BookDetails/" + storie.id)
+                                }
+                              >
+                                Leggi
+                              </Button>
                               {isOwner && (
-                                <Button variant="dark">
+                                <Button
+                                  variant="dark"
+                                  onClick={() => {
+                                    navigate("/BookDetails/" + storie.id + "/");
+                                  }}
+                                >
                                   Aggiungi Capitoli
                                 </Button>
                               )}
