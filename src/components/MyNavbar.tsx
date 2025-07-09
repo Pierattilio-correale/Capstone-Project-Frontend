@@ -268,9 +268,13 @@ function MyNavbar({
                     title={
                       <img
                         src={data?.avatar}
-                        width={40}
-                        height={40}
-                        style={{ cursor: "pointer", borderRadius: "50%" }}
+                        style={{
+                          cursor: "pointer",
+                          borderRadius: "50%",
+                          width: "40px",
+                          height: "40px",
+                          objectFit: "cover",
+                        }}
                         alt="User"
                         onClick={(e) => {
                           e.preventDefault();
