@@ -12,6 +12,7 @@ import BookDetails from "./components/BookDetails";
 import CreazioneCapitolo from "./components/CreazioneCapitolo";
 import CapitoloDetails from "./components/CapitoloDetails";
 import BookPutOrDelite from "./components/BookPutOrDelite";
+import CreaStoria from "./components/CreaStoria";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -53,6 +54,10 @@ function App() {
               <Route
                 element={<BookDetails />}
                 path="/Profile/:profileId/BookDetails/:bookId"
+              />
+              <Route
+                element={<CreaStoria />}
+                path="/ProfileDetails/:profileId/CreaStoria/"
               />
               <Route
                 element={<CreazioneCapitolo />}

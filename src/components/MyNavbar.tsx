@@ -293,9 +293,12 @@ function MyNavbar({
                     >
                       Mio profilo
                     </Link>
-                    <NavDropdown.Item href="#action/3.2">
+                    <Link
+                      to={`/ProfileDetails/${data?.id}` + `/CreaStoria`}
+                      className="dropdown-item"
+                    >
                       Crea Storia
-                    </NavDropdown.Item>
+                    </Link>
                     <NavDropdown.Item href="#action/3.3">
                       Statistiche
                     </NavDropdown.Item>

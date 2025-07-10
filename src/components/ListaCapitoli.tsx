@@ -90,7 +90,14 @@ const ListaCapitoli = () => {
                   >
                     AGGIUNGI CAPITOLI
                   </a>
-                  <Button variant="dark" className="">
+                  <Button
+                    variant="dark"
+                    onClick={() => {
+                      navigate(
+                        "/BookDetails/" + data?.id + "/CapitoliDetails/Creation"
+                      );
+                    }}
+                  >
                     +
                   </Button>
                 </div>

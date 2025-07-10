@@ -55,10 +55,11 @@ const CreazioneCapitolo = () => {
         }
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
-        setData(data);
-        navigate("/BookDetails/" + params.bookId);
+      .then((dataCapitolo) => {
+        console.log(dataCapitolo);
+        if (data?.autore?.id) {
+          navigate(`/Profile/${data.autore.id}/BookDetails/${params.bookId}`);
+        }
       })
       .catch((err) => {
         console.log("errore nella fetch ", err);
