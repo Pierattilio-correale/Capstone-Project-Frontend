@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Modal, Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import PatchImgBook from "./PatchImgBook";
 
 const BookPutOrDelite = () => {
   interface User {
@@ -163,6 +164,9 @@ const BookPutOrDelite = () => {
                 <p>
                   <strong>Descrizione:</strong> {data?.descrizione}
                 </p>
+                <div className="my-5">
+                  <PatchImgBook />
+                </div>
               </div>
             </div>
           </Col>

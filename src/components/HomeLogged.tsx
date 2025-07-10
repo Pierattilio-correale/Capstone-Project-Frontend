@@ -73,7 +73,14 @@ const HomeLogged = () => {
                   </Card.Text>
                   <Button
                     variant="dark"
-                    onClick={() => navigate("/BookDetails/" + storia?.id)}
+                    onClick={() =>
+                      navigate(
+                        "/Profile/" +
+                          storia?.autore.id +
+                          "/BookDetails/" +
+                          storia.id
+                      )
+                    }
                   >
                     Leggi!
                   </Button>
@@ -114,7 +121,14 @@ const HomeLogged = () => {
                   </Card.Text>
                   <Button
                     variant="dark"
-                    onClick={() => navigate("/BookDetails/" + storia?.id)}
+                    onClick={() =>
+                      navigate(
+                        "/Profile/" +
+                          storia?.autore.id +
+                          "/BookDetails/" +
+                          storia.id
+                      )
+                    }
                   >
                     Leggi!
                   </Button>
@@ -155,7 +169,14 @@ const HomeLogged = () => {
                   </Card.Text>
                   <Button
                     variant="dark"
-                    onClick={() => navigate("/BookDetails/" + storia?.id)}
+                    onClick={() =>
+                      navigate(
+                        "/Profile/" +
+                          storia?.autore.id +
+                          "/BookDetails/" +
+                          storia.id
+                      )
+                    }
                   >
                     Leggi!
                   </Button>

@@ -50,7 +50,10 @@ function App() {
                 element={<ProfileDetails />}
                 path="/ProfileDetails/:profileId"
               />
-              <Route element={<BookDetails />} path="/BookDetails/:bookId" />
+              <Route
+                element={<BookDetails />}
+                path="/Profile/:profileId/BookDetails/:bookId"
+              />
               <Route
                 element={<CreazioneCapitolo />}
                 path="/BookDetails/:bookId/CapitoliDetails/Creation"

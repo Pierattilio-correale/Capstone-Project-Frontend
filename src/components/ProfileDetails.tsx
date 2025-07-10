@@ -459,7 +459,12 @@ const ProfileDetails = () => {
                                 className="me-2"
                                 variant="dark"
                                 onClick={() =>
-                                  navigate("/BookDetails/" + storie.id)
+                                  navigate(
+                                    "/Profile/" +
+                                      storie.autore.id +
+                                      "/BookDetails/" +
+                                      storie.id
+                                  )
                                 }
                               >
                                 Leggi
@@ -468,7 +473,11 @@ const ProfileDetails = () => {
                                 <Button
                                   variant="dark"
                                   onClick={() => {
-                                    navigate("/BookDetails/" + storie.id + "/");
+                                    navigate(
+                                      "/BookDetails/" +
+                                        storie.id +
+                                        "/CapitoliDetails/Creation"
+                                    );
                                   }}
                                 >
                                   Aggiungi Capitoli

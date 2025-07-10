@@ -64,13 +64,41 @@ const CreazioneCapitolo = () => {
         console.log("errore nella fetch ", err);
       });
   };
+  const storiaDetails = () => {
+    fetch(`http://localhost:8080/storie/${params.bookId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("errore nella promis");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((err) => {
+        console.log("errore nella fetch", err);
+      });
+  };
+  useEffect(() => {
+    storiaDetails();
+  }, []);
+
   return (
     <>
       <Container className="bg-body-tertiary min-vh-100 d-flex flex-column align-items-center pt-5">
         <Form onSubmit={postCapitolo} className="w-100 px-4">
           <div className="w-50 mx-auto">
+            <div className="text-center">
+              <img
+                src={data?.immagineCopertina}
+                width={200}
+                height={200}
+                className="img-fluid"
+              />
+            </div>
             <h2 className="text-center my-3">Crea il tuo capitolo!</h2>
-
+            <h4 className="text-center">per {data?.titolo}</h4>
             <Form.Group className="mb-3">
               <Form.Label>Titolo</Form.Label>
               <Form.Control
