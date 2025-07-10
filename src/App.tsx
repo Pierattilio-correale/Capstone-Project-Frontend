@@ -11,6 +11,7 @@ import HomeLogged from "./components/HomeLogged";
 import BookDetails from "./components/BookDetails";
 import CreazioneCapitolo from "./components/CreazioneCapitolo";
 import CapitoloDetails from "./components/CapitoloDetails";
+import BookPutOrDelite from "./components/BookPutOrDelite";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -53,6 +54,10 @@ function App() {
               <Route
                 element={<CreazioneCapitolo />}
                 path="/BookDetails/:bookId/CapitoliDetails/Creation"
+              />
+              <Route
+                element={<BookPutOrDelite />}
+                path="/BookPutOrDelite/:bookId"
               />
               <Route
                 element={<CapitoloDetails />}
