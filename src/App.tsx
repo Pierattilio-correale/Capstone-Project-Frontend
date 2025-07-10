@@ -13,6 +13,7 @@ import CreazioneCapitolo from "./components/CreazioneCapitolo";
 import CapitoloDetails from "./components/CapitoloDetails";
 import BookPutOrDelite from "./components/BookPutOrDelite";
 import CreaStoria from "./components/CreaStoria";
+import ModificaCapitolo from "./components/ModificaCapitolo";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -70,6 +71,10 @@ function App() {
               <Route
                 element={<CapitoloDetails />}
                 path="/CapitoloDetails/:capitoloId"
+              />
+              <Route
+                element={<ModificaCapitolo />}
+                path="/ProfileDetails/:profileId/BookDetails/:bookId/ModificaCapitolo/:capitoloId"
               />
             </Routes>
           </main>

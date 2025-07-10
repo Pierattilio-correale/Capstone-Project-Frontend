@@ -42,11 +42,7 @@ const ListaCapitoli = () => {
   const params = useParams();
   const loggedUserId = localStorage.getItem("userId");
   const isOwner = loggedUserId === params.profileId;
-  console.log(isOwner);
 
-  console.log("loggedUserId:", loggedUserId);
-  console.log("params.profileId:", params.profileId);
-  console.log("isOwner:", isOwner);
   const [data, setData] = useState<Storia | null>(null);
 
   const listaCapitoli = () => {
@@ -108,17 +104,34 @@ const ListaCapitoli = () => {
               {data?.capitoli
                 .sort((a, b) => a.numeroCapitolo - b.numeroCapitolo)
                 .map((capitolo) => (
-                  <ListGroupItem
-                    key={capitolo.id}
-                    onClick={() => {
-                      navigate("/CapitoloDetails/" + capitolo.id);
-                    }}
-                  >
-                    <strong>
-                      {capitolo.numeroCapitolo}. {capitolo.titolo}
-                    </strong>
-                    <br />
-                  </ListGroupItem>
+                  <div className="d-flex" key={capitolo.id}>
+                    <ListGroupItem
+                      className="w-100"
+                      onClick={() => {
+                        navigate("/CapitoloDetails/" + capitolo.id);
+                      }}
+                    >
+                      <strong>
+                        {capitolo.numeroCapitolo}. {capitolo.titolo}
+                      </strong>
+                      <br />
+                    </ListGroupItem>
+                    <button
+                      className="btn fs-4 p-0 mx-2"
+                      onClick={() => {
+                        navigate(
+                          "/ProfileDetails/" +
+                            params.profileId +
+                            "/BookDetails/" +
+                            params.bookId +
+                            "/ModificaCapitolo/" +
+                            capitolo.id
+                        );
+                      }}
+                    >
+                      <i className="bi bi-pencil"></i>
+                    </button>
+                  </div>
                 ))}
             </ListGroup>
           </Col>
