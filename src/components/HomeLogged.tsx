@@ -21,6 +21,7 @@ const HomeLogged = () => {
     immagineCopertina: string;
     autore: User;
   }
+  const userId = localStorage.getItem("userId");
   const [data, setData] = useState<Storia[]>([]);
   const navigate = useNavigate();
   const fetchStorieIniziali = () => {
@@ -201,7 +202,14 @@ const HomeLogged = () => {
                 emozionante clicca qui!
               </h3>
               <div>
-                <Button className="buttonanimation fs-4">Crea Storia!</Button>
+                <Button
+                  className="buttonanimation fs-4"
+                  onClick={() => {
+                    navigate("/ProfileDetails/" + userId + "/CreaStoria/");
+                  }}
+                >
+                  Crea Storia!
+                </Button>
               </div>
             </div>
           </Col>

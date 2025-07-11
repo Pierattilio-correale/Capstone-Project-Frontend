@@ -70,7 +70,7 @@ const PatchImgBook = () => {
       <div className="mt-3 w-25">
         <Form.Group controlId="formFile" className="mb-2">
           <Form.Label>
-            <strong>Carica una nuova immagine profilo</strong>
+            <strong>Carica una nuova immagine di copertina</strong>
           </Form.Label>
           <Form.Control
             type="file"

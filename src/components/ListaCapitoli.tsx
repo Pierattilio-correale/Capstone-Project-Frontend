@@ -116,8 +116,9 @@ const ListaCapitoli = () => {
                       </strong>
                       <br />
                     </ListGroupItem>
+
                     <button
-                      className="btn fs-4 p-0 mx-2"
+                      className="btn fs-4 p-0 mx-2 "
                       onClick={() => {
                         navigate(
                           "/ProfileDetails/" +

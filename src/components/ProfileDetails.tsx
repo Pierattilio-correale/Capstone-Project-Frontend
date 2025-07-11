@@ -235,7 +235,7 @@ const ProfileDetails = () => {
                     <div className="mt-3 w-25">
                       <Form.Group controlId="formFile" className="mb-2">
                         <Form.Label>
-                          Carica una nuova immagine profilo
+                          <strong> Carica una nuova immagine profilo</strong>
                         </Form.Label>
                         <Form.Control
                           type="file"

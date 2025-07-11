@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import CancellaCapitolo from "./CancellaCapitolo";
 
 const ModificaCapitolo = () => {
   interface Capitoli {
@@ -151,8 +152,9 @@ const ModificaCapitolo = () => {
 
         <div className="text-center my-3">
           <Button className="btn btn-primary rounded-5 pt-1 px-4" type="submit">
-            Save
+            Salva
           </Button>
+          <CancellaCapitolo />
         </div>
       </Form>
     </Container>
