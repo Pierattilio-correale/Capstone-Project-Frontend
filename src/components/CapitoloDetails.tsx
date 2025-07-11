@@ -68,6 +68,7 @@ const CapitoloDetails = () => {
           <Col className="col-2 invisible">ciao</Col>
         </Row>
       </Container>
+      <Container className="bg-body-tertiary">prova</Container>
     </>
   );
 };
