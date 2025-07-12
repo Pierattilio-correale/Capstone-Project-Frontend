@@ -93,6 +93,7 @@ const CancellaCapitolo = () => {
           <Button
             onClick={deleteCapitolo}
             className="btn btn-primary rounded-5 pt-1 px-3"
+            variant="danger"
           >
             cancella il capitolo
           </Button>

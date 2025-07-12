@@ -21,8 +21,11 @@ interface Storia {
   immagineCopertina: string;
   autore: User;
 }
+type CancellaProfiloProps = {
+  onLogout: () => void;
+};
 
-const CancellaProfilo = () => {
+const CancellaProfilo: React.FC<CancellaProfiloProps> = ({ onLogout }) => {
   const params = useParams();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -45,7 +48,9 @@ const CancellaProfilo = () => {
       .then((data) => {
         console.log(data);
         setSuccess(true);
+
         setTimeout(() => {
+          onLogout();
           navigate("/");
         }, 500);
       })

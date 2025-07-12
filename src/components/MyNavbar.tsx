@@ -33,8 +33,11 @@ interface MyNavbarProps {
   handleCloseRegister: () => void;
   handleShowRegister: () => void;
   handleShowLogin: () => void;
+  handleIsNotLoggedIn: () => void;
+  handleIsLoggedIn: () => void;
   showLogin: boolean;
   showRegister: boolean;
+  isLoggedIn: boolean;
 }
 
 function MyNavbar({
@@ -42,13 +45,15 @@ function MyNavbar({
   handleCloseRegister,
   handleShowRegister,
   handleShowLogin,
+  handleIsNotLoggedIn,
+  handleIsLoggedIn,
   showLogin,
   showRegister,
+  isLoggedIn,
 }: MyNavbarProps) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [nome, setNome] = useState("");
   const [cognome, setCognome] = useState("");
   const [dataNascita, setDataNascita] = useState("");
@@ -65,13 +70,13 @@ function MyNavbar({
       try {
         const decoded = jwtDecode<JwtPayload>(token);
         if (decoded?.sub) {
-          setIsLoggedIn(true);
+          handleIsLoggedIn();
           utenteLoggato();
         }
       } catch (err) {
         console.error("Token non valido:", err);
         localStorage.removeItem("token");
-        setIsLoggedIn(false);
+        handleIsNotLoggedIn();
       }
     }
   }, []);
@@ -155,7 +160,7 @@ function MyNavbar({
         if (decoded?.sub) {
           localStorage.setItem("userId", decoded.sub);
         }
-        setIsLoggedIn(true);
+        handleIsLoggedIn();
         handleCloseLogin();
         utenteLoggato();
         navigate("/home");
@@ -170,7 +175,7 @@ function MyNavbar({
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-    setIsLoggedIn(false);
+    handleIsNotLoggedIn();
     setShowUserDropdown(false);
     setData(null);
     navigate("/");

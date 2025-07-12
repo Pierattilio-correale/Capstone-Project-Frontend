@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -19,10 +19,18 @@ import ScrollToTop from "./components/ScrollToTop";
 function App() {
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handleIsLoggedIn = () => setIsLoggedIn(true);
+  const handleIsNotLoggedIn = () => setIsLoggedIn(false);
   const handleCloseRegister = () => setShowRegister(false);
   const handleShowRegister = () => setShowRegister(true);
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowLogin = () => setShowLogin(true);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+  };
   return (
     <>
       <BrowserRouter>
@@ -33,8 +41,11 @@ function App() {
             handleCloseRegister={handleCloseRegister}
             handleShowRegister={handleShowRegister}
             handleShowLogin={handleShowLogin}
+            handleIsNotLoggedIn={handleIsNotLoggedIn}
+            handleIsLoggedIn={handleIsLoggedIn}
             showLogin={showLogin}
             showRegister={showRegister}
+            isLoggedIn={isLoggedIn}
           />
           <main className="flex-grow-1 ">
             <Routes>
@@ -51,7 +62,7 @@ function App() {
               />
               <Route element={<HomeLogged />} path="/home" />
               <Route
-                element={<ProfileDetails />}
+                element={<ProfileDetails onLogout={handleLogout} />}
                 path="/ProfileDetails/:profileId"
               />
               <Route

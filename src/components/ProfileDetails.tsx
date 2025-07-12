@@ -16,8 +16,11 @@ const tagliaDescrizione = (
     fine > 0 ? descrizione.slice(0, fine) : descrizione.slice(0, maxLength);
   return taglio + "...";
 };
+type ProfileDetailsProps = {
+  onLogout: () => void;
+};
 
-const ProfileDetails = () => {
+const ProfileDetails: React.FC<ProfileDetailsProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
@@ -79,7 +82,6 @@ const ProfileDetails = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setData(data);
       })
       .catch((err) => {
@@ -254,8 +256,11 @@ const ProfileDetails = () => {
                       </Button>
                     </div>
                     <div className="d-flex flex-wrap gap-2 mt-3">
-                      <ModificaProfilo />
-                      <CancellaProfilo />
+                      <ModificaProfilo
+                        profileId={params.profileId ?? ""}
+                        onUpdate={fecthProfile}
+                      />
+                      <CancellaProfilo onLogout={onLogout} />
                       <Button
                         variant="outline-secondary"
                         className="rounded-pill"
