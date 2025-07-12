@@ -73,7 +73,7 @@ const CancellaProfilo = () => {
               Profilo cancellato con successo!
             </div>
           )}
-          <h4 className="my">sei sicuro di voler cancellare il profilo?</h4>
+          <h4 className="my">Sei sicuro di voler cancellare il profilo?</h4>
           <div className="my-3 text-center">
             <Button
               variant="danger"

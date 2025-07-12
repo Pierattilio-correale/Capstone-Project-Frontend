@@ -58,7 +58,15 @@ const CapitoloDetails = () => {
   }, []);
   return (
     <>
-      <Container className="bg-body-tertiary min-vh-100 my-3 ">
+      <Container
+        className=" min-vh-100 my-3 "
+        style={{
+          background: "#fcf9f4",
+          border: "1px solid #e0dccc",
+          borderRadius: "1rem",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
+        }}
+      >
         <Row>
           <h2 className="text-center my-3">{data?.titolo}</h2>
           <Col className="col-2 invisible">ciao</Col>

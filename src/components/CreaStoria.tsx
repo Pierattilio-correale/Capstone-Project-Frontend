@@ -93,7 +93,15 @@ const CreaStoria = () => {
 
   return (
     <>
-      <Container className="bg-body-tertiary min-vh-100  pt-5">
+      <Container
+        className=" min-vh-100  pt-5"
+        style={{
+          background: "#fcf9f4",
+          border: "1px solid #e0dccc",
+          borderRadius: "1rem",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
+        }}
+      >
         <Row className="d-flex justify-content-between">
           {showSuccess && (
             <div className="alert alert-success" role="alert">
@@ -101,30 +109,30 @@ const CreaStoria = () => {
             </div>
           )}
           <Col>
-            <div className="d-block d-md-flex justify-content-between">
-              <h2 className="mx-auto">Aggiungi nuova storia!</h2>
-
-              <div className="d-flex  pe-3">
-                <Button
-                  variant="primary"
-                  className="d-flex align-items-center gap-2"
-                  onClick={handleShow}
-                >
-                  <i className="bi bi-plus-lg"></i> Aggiungi nuova storia
-                </Button>
-              </div>
+            <div className="">
+              <h2 className="text-center fontnuovo ">Aggiungi nuova storia!</h2>
             </div>
           </Col>
           <Col className="col-12 my-5">
-            <h3 className="fontnuovo fs-2">
+            <h3 className="fs-2 text-center mb-4">
               Crea la storia dei tuoi sogni e mostrala alla community
             </h3>
-            <img
-              src={data?.avatar}
-              width={300}
-              height={300}
-              className="img-fluid"
-            />
+            <div className="text-center">
+              <img
+                src={data?.avatar}
+                width={300}
+                height={300}
+                className="img-fluid"
+              />
+            </div>
+            <div className="d-flex justify-content-center my-4">
+              <Button
+                className="d-flex align-items-center gap-2 buttonanimation"
+                onClick={handleShow}
+              >
+                <i className="bi bi-plus-lg"></i> Aggiungi nuova storia
+              </Button>
+            </div>
           </Col>
           <Modal show={showModal} onHide={handleClose}>
             <Modal.Header closeButton>

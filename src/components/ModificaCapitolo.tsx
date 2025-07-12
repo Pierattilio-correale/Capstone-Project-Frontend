@@ -107,7 +107,15 @@ const ModificaCapitolo = () => {
   };
 
   return (
-    <Container className="bg-body-tertiary min-vh-100 d-flex flex-column align-items-center pt-5">
+    <Container
+      className=" min-vh-100 d-flex flex-column align-items-center pt-5"
+      style={{
+        background: "#fcf9f4",
+        border: "1px solid #e0dccc",
+        borderRadius: "1rem",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
+      }}
+    >
       {showConfermaModifica && (
         <div className="alert alert-success text-center m-3" role="alert">
           Capitolo modificato con successo!

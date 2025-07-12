@@ -48,7 +48,15 @@ const BookDetails = () => {
 
   return (
     <>
-      <Container className="  min-vh-100 my-4 bg-body-tertiary p-0">
+      <Container
+        className="  min-vh-100 my-4  p-0"
+        style={{
+          background: "#fcf9f4",
+          border: "1px solid #e0dccc",
+          borderRadius: "1rem",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
+        }}
+      >
         <Row className="d-flex flex-column-reverse flex-md-row">
           <Col className="col-12 col-md-4 p-0">
             <ListaCapitoli />

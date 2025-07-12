@@ -121,10 +121,20 @@ const BookPutOrDelite = () => {
           Storia eliminata con successo!
         </div>
       )}
-      <Container className="bg-body-tertiary min-vh-100 my-3 ">
+      <Container
+        className=" min-vh-100 my-3 "
+        style={{
+          background: "#fcf9f4",
+          border: "1px solid #e0dccc",
+          borderRadius: "1rem",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
+        }}
+      >
         <Row className="">
           <Col className="col-12 m-0">
-            <h2 className="text-center my-3 ">Modifica la tua storia!</h2>
+            <h2 className="text-center my-3 fontnuovo fs-1">
+              Modifica la tua storia!
+            </h2>
 
             <div className=" d-flex flex-column gap-4 justify-content-center">
               <div className="d-flex flex-column align-items-center flex-md-row justify-content-md-between align-items-md-start ">
@@ -157,7 +167,9 @@ const BookPutOrDelite = () => {
               </div>
 
               <div className="flex-grow-1 ">
-                <h3 className="text-center ">{data?.titolo}</h3>
+                <h3 className="text-center fontnuovo fs-2 ">
+                  Titolo: "{data?.titolo}"
+                </h3>
                 <p>
                   <strong>Genere:</strong> {data?.genere}
                 </p>
@@ -226,8 +238,10 @@ const BookPutOrDelite = () => {
           <Modal.Title>Sei sicuro?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Questa azione eliminerà la storia e tutti i capitoli in modo
-          permanente. Vuoi continuare?
+          <h5>
+            Questa azione eliminerà la storia e tutti i capitoli in modo
+            permanente. Vuoi continuare?
+          </h5>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseConfermaEliminazione}>

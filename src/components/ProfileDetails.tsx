@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import CancellaProfilo from "./CancellaProfilo";
+import ModificaProfilo from "./ModificaProfilo";
 
 const tagliaDescrizione = (
   descrizione: string,
@@ -65,7 +66,6 @@ const ProfileDetails = () => {
   const [descrizione, setDescrizione] = useState("");
   const [descrizioneUser, setDescrizioneUser] = useState("");
   const [genere, setGenere] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
   const fecthProfile = () => {
@@ -254,12 +254,7 @@ const ProfileDetails = () => {
                       </Button>
                     </div>
                     <div className="d-flex flex-wrap gap-2 mt-3">
-                      <Button
-                        variant="outline-primary"
-                        className="rounded-pill"
-                      >
-                        Crea Storia
-                      </Button>
+                      <ModificaProfilo />
                       <CancellaProfilo />
                       <Button
                         variant="outline-secondary"
@@ -315,7 +310,7 @@ const ProfileDetails = () => {
                           className="btn btn-primary rounded-5 pt-1 px-3"
                           type="submit"
                         >
-                          Save
+                          Salva
                         </Button>
                       </Form>
                     </Modal.Body>
@@ -392,7 +387,7 @@ const ProfileDetails = () => {
                             className="btn btn-primary rounded-5 pt-1 px-3"
                             type="submit"
                           >
-                            Save
+                            Salva
                           </Button>
                         </Form>
                       </Modal.Body>

@@ -70,8 +70,8 @@ const ListaCapitoli = () => {
       <Container className="m-0 ">
         <Row>
           <Col>
-            <h4 className="text-center my-3 fs-3">
-              {isOwner ? "i tuoi capitoli" : "i suoi capitoli"}
+            <h4 className="text-center my-3 fs-3 fontMont">
+              {isOwner ? "•I tuoi capitoli•" : "•I suoi capitoli•"}
             </h4>
             {isOwner && (
               <>

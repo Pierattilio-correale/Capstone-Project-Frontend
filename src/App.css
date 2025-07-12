@@ -38,6 +38,12 @@ color: white;
   font-family: "Cormorant", serif;
           font-size: 55px;
 }
+.fontMont{
+    font-family: "Montserrat", sans-serif;
+}
+.fontTikTok{
+    font-family: "TikTok Sans", sans-serif;
+}
 
 .coloreJ{
   color: #937DD2;

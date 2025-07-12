@@ -87,7 +87,15 @@ const CreazioneCapitolo = () => {
 
   return (
     <>
-      <Container className="bg-body-tertiary min-vh-100 d-flex flex-column align-items-center pt-5">
+      <Container
+        className=" min-vh-100 d-flex flex-column align-items-center pt-5"
+        style={{
+          background: "#fcf9f4",
+          border: "1px solid #e0dccc",
+          borderRadius: "1rem",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
+        }}
+      >
         <Form onSubmit={postCapitolo} className="w-100 px-4">
           <div className="w-50 mx-auto">
             <div className="text-center">
@@ -98,10 +106,12 @@ const CreazioneCapitolo = () => {
                 className="img-fluid"
               />
             </div>
-            <h2 className="text-center my-3">Crea il tuo capitolo!</h2>
-            <h4 className="text-center">per {data?.titolo}</h4>
+            <h2 className="text-center my-3 fontTikTok fs-2">
+              AGGIUNGI CAPITOLO ALLA STORIA
+            </h2>
+            <h4 className="text-center fontTikTok"> "{data?.titolo}"</h4>
             <Form.Group className="mb-3">
-              <Form.Label>Titolo</Form.Label>
+              <Form.Label>Titolo Capitolo</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -139,7 +149,7 @@ const CreazioneCapitolo = () => {
               className="btn btn-primary rounded-5 pt-1 px-4"
               type="submit"
             >
-              Save
+              Salva
             </Button>
           </div>
         </Form>
