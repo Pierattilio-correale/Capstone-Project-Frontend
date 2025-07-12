@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import CancellaProfilo from "./CancellaProfilo";
 
 const tagliaDescrizione = (
   descrizione: string,
@@ -259,12 +260,7 @@ const ProfileDetails = () => {
                       >
                         Crea Storia
                       </Button>
-                      <Button
-                        variant="outline-primary"
-                        className="rounded-pill"
-                      >
-                        Migliora profilo
-                      </Button>
+                      <CancellaProfilo />
                       <Button
                         variant="outline-secondary"
                         className="rounded-pill"
