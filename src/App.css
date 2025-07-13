@@ -136,6 +136,23 @@ color: #20ADFC;
     
   }
 }
+@keyframes appariright{
+  0%{
+   transform: translatex(300px);
+   opacity: 0;
+  }
+  
+  50%{
+    transform: translatex(100px);
+    opacity: 0.5;
+  }
+ 
+  100%{
+   transform: translatex(0px);
+      opacity: 1;
+    
+  }
+}
 @keyframes apparidalvuoto{
   0%{
    
@@ -159,6 +176,9 @@ color: #20ADFC;
 }
 .apparileft{
    animation: apparileft 2s linear;
+}
+.appariright{
+   animation: appariright 2s linear;
 }
 .apparidalvuoto{
    animation: apparidalvuoto 3s linear;

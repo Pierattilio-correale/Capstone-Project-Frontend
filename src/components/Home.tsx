@@ -104,7 +104,7 @@ const Home = ({
               src="assets/logojpp.png"
               width={220}
               height={220}
-              className="neon-border"
+              className="neon-border apparidalvuoto"
             />
           </Col>
           <Col className="d-flex justify-content-center align-items-center col-md-6 col-lg-3">
@@ -121,6 +121,7 @@ const Home = ({
               <img
                 src="assets/quadratibianchi.png"
                 alt="sfondo"
+                className="appariright"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -172,7 +173,7 @@ const Home = ({
               src="assets/azzurroremovebgpreview.png"
               width={150}
               height={150}
-              className="d-none d-lg-block"
+              className="d-none d-lg-block apparidalvuoto"
             />
           </Col>
         </Row>
@@ -188,7 +189,7 @@ const Home = ({
         </Col>
       </Container>
       <Container className="my-5">
-        <h2 className="text-white">I migliori JewelPaper</h2>
+        <h2 className="text-white fontnuovo fs-1">I migliori JewelPaper!</h2>
         <Row className="g-3">
           {data?.slice(0, 6).map((storia) => (
             <Col
@@ -200,6 +201,14 @@ const Home = ({
                   variant="top"
                   src={storia.immagineCopertina}
                   alt={storia.titolo}
+                  onClick={() => {
+                    navigate(
+                      "/Profile/" +
+                        storia.autore.id +
+                        "/BookDetails/" +
+                        storia.id
+                    );
+                  }}
                 />
                 <Card.Body
                   className="d-flex flex-column  text-white"
@@ -236,7 +245,7 @@ const Home = ({
         </Row>
       </Container>
       <Container className="text-center">
-        <h2 className="text-white ">
+        <h2 className="text-white fontTikTok">
           Vuoi iniziare anche tu a scrivere storie e realizzare i tuoi sogni?
         </h2>
         <Button className="buttonanimation me-2 fs-4" onClick={handleShowLogin}>

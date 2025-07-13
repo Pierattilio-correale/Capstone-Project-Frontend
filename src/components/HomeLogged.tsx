@@ -44,7 +44,7 @@ const HomeLogged = () => {
   return (
     <>
       <Container className="my-5">
-        <h2 className="text-white">Per te!</h2>
+        <h2 className="text-white fontnuovo fs-1">Per te!</h2>
         <Row className="g-1">
           {data?.slice(0, 6).map((storia) => (
             <Col
@@ -56,6 +56,14 @@ const HomeLogged = () => {
                   variant="top"
                   src={storia.immagineCopertina}
                   alt={storia.titolo}
+                  onClick={() => {
+                    navigate(
+                      "/Profile/" +
+                        storia?.autore.id +
+                        "/BookDetails/" +
+                        storia.id
+                    );
+                  }}
                 />
                 <Card.Body
                   className="d-flex flex-column  text-white"
@@ -92,7 +100,7 @@ const HomeLogged = () => {
         </Row>
       </Container>
       <Container className="my-5">
-        <h2 className="text-white">Novità del momento</h2>
+        <h2 className="text-white fontnuovo fs-1">Novità del momento!</h2>
         <Row className="g-1">
           {data?.slice(6, 12).map((storia) => (
             <Col
@@ -104,6 +112,14 @@ const HomeLogged = () => {
                   variant="top"
                   src={storia.immagineCopertina}
                   alt={storia.titolo}
+                  onClick={() => {
+                    navigate(
+                      "/Profile/" +
+                        storia?.autore.id +
+                        "/BookDetails/" +
+                        storia.id
+                    );
+                  }}
                 />
                 <Card.Body
                   className="d-flex flex-column  text-white"
@@ -140,7 +156,7 @@ const HomeLogged = () => {
         </Row>
       </Container>
       <Container className="my-5">
-        <h2 className="text-white">Romance</h2>
+        <h2 className="text-white fontnuovo fs-1">Tendenti!</h2>
         <Row className="g-1">
           {data?.slice(12, 18).map((storia) => (
             <Col
@@ -152,6 +168,14 @@ const HomeLogged = () => {
                   variant="top"
                   src={storia.immagineCopertina}
                   alt={storia.titolo}
+                  onClick={() => {
+                    navigate(
+                      "/Profile/" +
+                        storia?.autore.id +
+                        "/BookDetails/" +
+                        storia.id
+                    );
+                  }}
                 />
                 <Card.Body
                   className="d-flex flex-column  text-white"

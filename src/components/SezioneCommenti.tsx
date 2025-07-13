@@ -156,7 +156,7 @@ const SezioneCommenti = () => {
             />
           </Form.Group>
 
-          <Button variant="success" className="mb-4" type="submit">
+          <Button className="mb-4 buttonanimation" type="submit">
             Invia commento!
           </Button>
         </Form>

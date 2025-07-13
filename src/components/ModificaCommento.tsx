@@ -163,7 +163,7 @@ const ModificaCommento = ({
             />
           </Form.Group>
 
-          <Button variant="success" className="mb-4" type="submit">
+          <Button className="mb-4 buttonanimation" type="submit">
             Salva modifiche
           </Button>
         </Form>
