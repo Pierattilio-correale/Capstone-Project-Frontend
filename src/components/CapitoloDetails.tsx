@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import SezioneCommenti from "./SezioneCommenti";
 
 const CapitoloDetails = () => {
   interface Capitoli {
@@ -76,7 +77,7 @@ const CapitoloDetails = () => {
           <Col className="col-2 invisible">ciao</Col>
         </Row>
       </Container>
-      <Container className="bg-body-tertiary">prova</Container>
+      <SezioneCommenti />
     </>
   );
 };

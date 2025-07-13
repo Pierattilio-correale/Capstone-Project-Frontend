@@ -95,6 +95,7 @@ color: #20ADFC;
   }
   100%{
     opacity: 0;
+    display: none;
   }
 }
 .alertdisappear{
