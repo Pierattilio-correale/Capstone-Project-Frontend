@@ -15,6 +15,7 @@ import BookPutOrDelite from "./components/BookPutOrDelite";
 import CreaStoria from "./components/CreaStoria";
 import ModificaCapitolo from "./components/ModificaCapitolo";
 import ScrollToTop from "./components/ScrollToTop";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -60,7 +61,14 @@ function App() {
                 }
                 path="/"
               />
-              <Route element={<HomeLogged />} path="/home" />
+              <Route
+                path="/home"
+                element={
+                  <PrivateRoute isLoggedIn={isLoggedIn}>
+                    <HomeLogged />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 element={<ProfileDetails onLogout={handleLogout} />}
                 path="/ProfileDetails/:profileId"
@@ -70,15 +78,27 @@ function App() {
                 path="/Profile/:profileId/BookDetails/:bookId"
               />
               <Route
-                element={<CreaStoria />}
+                element={
+                  <PrivateRoute isLoggedIn={isLoggedIn}>
+                    <CreaStoria />
+                  </PrivateRoute>
+                }
                 path="/ProfileDetails/:profileId/CreaStoria/"
               />
               <Route
-                element={<CreazioneCapitolo />}
+                element={
+                  <PrivateRoute isLoggedIn={isLoggedIn}>
+                    <CreazioneCapitolo />
+                  </PrivateRoute>
+                }
                 path="/BookDetails/:bookId/CapitoliDetails/Creation"
               />
               <Route
-                element={<BookPutOrDelite />}
+                element={
+                  <PrivateRoute isLoggedIn={isLoggedIn}>
+                    <BookPutOrDelite />
+                  </PrivateRoute>
+                }
                 path="/BookPutOrDelite/:bookId"
               />
               <Route
@@ -86,7 +106,11 @@ function App() {
                 path="/CapitoloDetails/:capitoloId"
               />
               <Route
-                element={<ModificaCapitolo />}
+                element={
+                  <PrivateRoute isLoggedIn={isLoggedIn}>
+                    <ModificaCapitolo />
+                  </PrivateRoute>
+                }
                 path="/ProfileDetails/:profileId/BookDetails/:bookId/ModificaCapitolo/:capitoloId"
               />
             </Routes>
