@@ -6,7 +6,7 @@ import MyNavbar from "./components/MyNavbar";
 import Home from "./components/Home";
 import MyFooter from "./components/MyFooter";
 import ProfileDetails from "./components/ProfileDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HomeLogged from "./components/HomeLogged";
 import BookDetails from "./components/BookDetails";
 import CreazioneCapitolo from "./components/CreazioneCapitolo";
@@ -16,6 +16,7 @@ import CreaStoria from "./components/CreaStoria";
 import ModificaCapitolo from "./components/ModificaCapitolo";
 import ScrollToTop from "./components/ScrollToTop";
 import PrivateRoute from "./components/PrivateRoute";
+import { Navigate } from "react-router-dom";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -32,6 +33,14 @@ function App() {
     localStorage.removeItem("userId");
     setIsLoggedIn(false);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    if (token && userId) {
+      setIsLoggedIn(true);
+    }
+  }, []);
   return (
     <>
       <BrowserRouter>
@@ -51,15 +60,19 @@ function App() {
           <main className="flex-grow-1 ">
             <Routes>
               <Route
-                element={
-                  <Home
-                    handleCloseLogin={handleCloseLogin}
-                    handleCloseRegister={handleCloseRegister}
-                    handleShowRegister={handleShowRegister}
-                    handleShowLogin={handleShowLogin}
-                  />
-                }
                 path="/"
+                element={
+                  isLoggedIn ? (
+                    <Navigate to="/home" replace />
+                  ) : (
+                    <Home
+                      handleCloseLogin={handleCloseLogin}
+                      handleCloseRegister={handleCloseRegister}
+                      handleShowRegister={handleShowRegister}
+                      handleShowLogin={handleShowLogin}
+                    />
+                  )
+                }
               />
               <Route
                 path="/home"
