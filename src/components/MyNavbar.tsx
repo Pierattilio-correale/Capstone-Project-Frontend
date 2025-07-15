@@ -75,7 +75,7 @@ function MyNavbar({
   const [isSuccess, setIsSuccess] = useState(false);
   const [inputSearch, setInputSearch] = useState("");
   const [searchResults, setSearchResults] = useState<Storia[]>([]);
-
+  const [userRole, setUserRole] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,6 +83,7 @@ function MyNavbar({
     if (token) {
       try {
         const decoded = jwtDecode<JwtPayload>(token);
+
         if (decoded?.sub) {
           handleIsLoggedIn();
           utenteLoggato();
@@ -174,6 +175,7 @@ function MyNavbar({
         if (decoded?.sub) {
           localStorage.setItem("userId", decoded.sub);
         }
+
         handleIsLoggedIn();
         handleCloseLogin();
         utenteLoggato();
@@ -185,6 +187,13 @@ function MyNavbar({
         setIsError(true);
       });
   };
+  useEffect(() => {
+    if (data?.role === "ADMIN") {
+      setUserRole(true);
+    } else {
+      setUserRole(false);
+    }
+  }, [data]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -273,6 +282,11 @@ function MyNavbar({
               <Link to={"Categorie"} className="nav-link">
                 Categorie
               </Link>
+              {userRole && (
+                <Link to={"Backoffice"} className="nav-link">
+                  Backoffice
+                </Link>
+              )}
             </Nav>
 
             <div className="d-block d-lg-flex ms-0 ms-lg-5  ms-xl-auto align-items-center">
