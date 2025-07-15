@@ -24,6 +24,7 @@ function App() {
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
   const handleIsLoggedIn = () => setIsLoggedIn(true);
   const handleIsNotLoggedIn = () => setIsLoggedIn(false);
   const handleCloseRegister = () => setShowRegister(false);
@@ -42,7 +43,12 @@ function App() {
     if (token && userId) {
       setIsLoggedIn(true);
     }
+    setIsAuthChecked(true);
   }, []);
+  if (!isAuthChecked) {
+    return <div>Caricamento...</div>;
+  }
+
   return (
     <>
       <BrowserRouter>
