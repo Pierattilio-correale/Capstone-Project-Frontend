@@ -52,7 +52,7 @@ const CategoirieDetails = () => {
         <h3 className="text-white fontnuovo fs-1 my-4">
           Ecco i migliori {params.Categorie}!
         </h3>
-        <Row>
+        <Row className="g-3">
           {data.map((storia) => (
             <Col
               key={storia.id}

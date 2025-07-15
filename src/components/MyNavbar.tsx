@@ -555,7 +555,7 @@ function MyNavbar({
             Risultati ricerca:
           </h5>
           <Container>
-            <Row className="d-flex justify-content-center">
+            <Row className="d-flex justify-content-center g-3">
               {searchResults.map((storia) => (
                 <Col
                   className="col-lg-3 col-md-4 col-sm-6 col-xl-2  "
