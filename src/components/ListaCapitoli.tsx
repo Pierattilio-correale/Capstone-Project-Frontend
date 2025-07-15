@@ -116,22 +116,23 @@ const ListaCapitoli = () => {
                       </strong>
                       <br />
                     </ListGroupItem>
-
-                    <button
-                      className="btn fs-4 p-0 mx-2 "
-                      onClick={() => {
-                        navigate(
-                          "/ProfileDetails/" +
-                            params.profileId +
-                            "/BookDetails/" +
-                            params.bookId +
-                            "/ModificaCapitolo/" +
-                            capitolo.id
-                        );
-                      }}
-                    >
-                      <i className="bi bi-pencil"></i>
-                    </button>
+                    {isOwner && (
+                      <button
+                        className="btn fs-4 p-0 mx-2 "
+                        onClick={() => {
+                          navigate(
+                            "/ProfileDetails/" +
+                              params.profileId +
+                              "/BookDetails/" +
+                              params.bookId +
+                              "/ModificaCapitolo/" +
+                              capitolo.id
+                          );
+                        }}
+                      >
+                        <i className="bi bi-pencil"></i>
+                      </button>
+                    )}
                   </div>
                 ))}
             </ListGroup>
