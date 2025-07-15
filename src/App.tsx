@@ -17,6 +17,8 @@ import ModificaCapitolo from "./components/ModificaCapitolo";
 import ScrollToTop from "./components/ScrollToTop";
 import PrivateRoute from "./components/PrivateRoute";
 import { Navigate } from "react-router-dom";
+import Categorie from "./components/Categorie";
+import CategoirieDetails from "./components/CategorieDetails";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -117,6 +119,11 @@ function App() {
               <Route
                 element={<CapitoloDetails />}
                 path="/CapitoloDetails/:capitoloId"
+              />
+              <Route element={<Categorie />} path="/Categorie" />
+              <Route
+                element={<CategoirieDetails />}
+                path="/Categorie/:Categorie"
               />
               <Route
                 element={
