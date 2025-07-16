@@ -104,7 +104,7 @@ const Backoffice = () => {
 
       <Row>
         <Col>
-          <Stat />
+          <Stat mode="globali" />
         </Col>
       </Row>
     </Container>

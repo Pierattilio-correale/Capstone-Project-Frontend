@@ -368,9 +368,9 @@ function MyNavbar({
                       >
                         Crea Storia
                       </Link>
-                      <NavDropdown.Item href="#action/3.3">
+                      <Link to={`/Statistiche`} className="dropdown-item">
                         Statistiche
-                      </NavDropdown.Item>
+                      </Link>
                       <NavDropdown.Divider />
                       <NavDropdown.Item href="#action/3.4">
                         Altro

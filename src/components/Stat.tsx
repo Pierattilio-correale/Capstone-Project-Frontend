@@ -12,7 +12,11 @@ import type { ChartOptions } from "chart.js";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const Stat: React.FC = () => {
+interface StatProps {
+  mode: "globali" | "mie";
+}
+
+const Stat: React.FC<StatProps> = ({ mode }) => {
   const [dataBackend, setDataBackend] = useState<{
     numeroStorie: number;
     numeroCapitoli: number;
@@ -22,8 +26,17 @@ const Stat: React.FC = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log("Token usato:", token);
+    console.log("UserId usato:", localStorage.getItem("userId"));
 
-    fetch("http://localhost:8080/api/statistiche/globali", {
+    const endpoint =
+      mode === "globali"
+        ? "http://localhost:8080/api/statistiche/globali"
+        : `http://localhost:8080/api/statistiche/${localStorage.getItem(
+            "userId"
+          )}`;
+
+    fetch(endpoint, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -32,11 +45,14 @@ const Stat: React.FC = () => {
         if (!res.ok) throw new Error("Errore nel fetch");
         return res.json();
       })
-      .then((data) => setDataBackend(data))
+      .then((data) => {
+        console.log("📊 Statistiche ricevute:", data);
+        setDataBackend(data);
+      })
       .catch((err) =>
         console.error("Errore nel caricamento delle statistiche:", err)
       );
-  }, []);
+  }, [mode]);
 
   if (!dataBackend) return <div>Loading...</div>;
 
@@ -44,7 +60,8 @@ const Stat: React.FC = () => {
     labels: ["Storie", "Capitoli", "Commenti"],
     datasets: [
       {
-        label: "Statistiche Generali",
+        label:
+          mode === "globali" ? "Statistiche Globali" : "Le Mie Statistiche",
         data: [
           dataBackend.numeroStorie,
           dataBackend.numeroCapitoli,
@@ -93,11 +110,11 @@ const Stat: React.FC = () => {
   return (
     <div className="p-6 bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-3xl mx-auto mt-8">
       <h2 className="text-2xl font-bold mb-6 text-indigo-600 text-center">
-        Storie! Capitoli! Commenti!
+        {mode === "globali" ? "Statistiche Generali" : "Le tue Statistiche"}
       </h2>
       <Bar data={chartData} options={options} />
       <p className="mt-4 text-center">
-        <strong> Media capitoli per storia:</strong>{" "}
+        <strong>Media capitoli per storia:</strong>{" "}
         {dataBackend.mediaCapitoliPerStoria}
       </p>
     </div>

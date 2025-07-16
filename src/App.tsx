@@ -20,6 +20,7 @@ import { Navigate } from "react-router-dom";
 import Categorie from "./components/Categorie";
 import CategoirieDetails from "./components/CategorieDetails";
 import Backoffice from "./components/Backoffice";
+import Statistiche from "./components/Statistiche";
 
 function App() {
   const [showRegister, setShowRegister] = useState(false);
@@ -133,6 +134,14 @@ function App() {
                 path="/Categorie/:Categorie"
               />
               <Route element={<Backoffice />} path="/Backoffice" />
+              <Route
+                element={
+                  <PrivateRoute isLoggedIn={isLoggedIn}>
+                    <Statistiche />
+                  </PrivateRoute>
+                }
+                path="/Statistiche"
+              />
               <Route
                 element={
                   <PrivateRoute isLoggedIn={isLoggedIn}>
