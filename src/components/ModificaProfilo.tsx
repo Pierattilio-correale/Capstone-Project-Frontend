@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Alert } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const ModificaProfilo = ({
@@ -33,6 +33,7 @@ const ModificaProfilo = ({
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => {
+    setIsError(false);
     setShowModal(true);
   };
 
@@ -40,6 +41,7 @@ const ModificaProfilo = ({
   const [email, setEmail] = useState("");
   const [dataNascita, setDataNascita] = useState("");
   const [data, setData] = useState<(User & { storie: Storia[] }) | null>(null);
+  const [isError, setIsError] = useState(false);
 
   const fecthProfile = () => {
     fetch(`http://localhost:8080/users/${profileId}`, {
@@ -95,9 +97,11 @@ const ModificaProfilo = ({
         console.log("Profilo aggiornato:", data);
         onUpdate();
         handleClose();
+        setIsError(false);
       })
       .catch((err) => {
         console.error("Errore nella fetch:", err);
+        setIsError(true);
       });
   };
 
@@ -115,6 +119,11 @@ const ModificaProfilo = ({
         <Modal.Header closeButton>
           <Modal.Title>Modifica il tuo profilo</Modal.Title>
         </Modal.Header>
+        {isError && (
+          <Alert variant="danger alertdisappear">
+            Questo username o email sono già presenti
+          </Alert>
+        )}
         <Modal.Body>
           <Form onSubmit={patchBaseUser}>
             <Form.Group className="mb-3">
