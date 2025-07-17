@@ -26,8 +26,6 @@ const Stat: React.FC<StatProps> = ({ mode }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("Token usato:", token);
-    console.log("UserId usato:", localStorage.getItem("userId"));
 
     const endpoint =
       mode === "globali"
