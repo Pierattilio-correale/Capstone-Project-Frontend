@@ -113,54 +113,57 @@ const SezioneCommenti = () => {
 
   return (
     <>
-      <Container
-        className="bg-body-tertiary my-3"
-        style={{
-          background: "#fcf9f4",
-          border: "1px solid #e0dccc",
-          borderRadius: "1rem",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
-        }}
-      >
-        <Form onSubmit={inviaCommento}>
-          <h3 className="mb-2">Commenti</h3>
-          {showCommentoInviato && (
-            <div
-              className="alert alert-success text-center m-3 alertdisappear"
-              role="alert"
-            >
-              Commento inviato con successo!
+      {userId && (
+        <Container
+          className="bg-body-tertiary my-3"
+          style={{
+            background: "#fcf9f4",
+            border: "1px solid #e0dccc",
+            borderRadius: "1rem",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.05)",
+          }}
+        >
+          <Form onSubmit={inviaCommento}>
+            <h3 className="mb-2">Commenti</h3>
+            {showCommentoInviato && (
+              <div
+                className="alert alert-success text-center m-3 alertdisappear"
+                role="alert"
+              >
+                Commento inviato con successo!
+              </div>
+            )}
+            <div className="d-flex justify-content-between my-3">
+              <h5>Dai un voto da 1 a 5 a questo capitolo</h5>
+              <Form.Select
+                aria-label="Default select example"
+                className="w-25 "
+                value={voto}
+                onChange={(e) => setVoto(Number(e.target.value))}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Select>
             </div>
-          )}
-          <div className="d-flex justify-content-between my-3">
-            <h5>Dai un voto da 1 a 5 a questo capitolo</h5>
-            <Form.Select
-              aria-label="Default select example"
-              className="w-25 "
-              value={voto}
-              onChange={(e) => setVoto(Number(e.target.value))}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </Form.Select>
-          </div>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control
-              type="text"
-              placeholder="Scrivi un commento..."
-              value={contenuto}
-              onChange={(e) => setContenuto(e.target.value)}
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                type="text"
+                placeholder="Scrivi un commento..."
+                value={contenuto}
+                onChange={(e) => setContenuto(e.target.value)}
+              />
+            </Form.Group>
 
-          <Button className="mb-4 buttonanimation" type="submit">
-            Invia commento!
-          </Button>
-        </Form>
-      </Container>
+            <Button className="mb-4 buttonanimation" type="submit">
+              Invia commento!
+            </Button>
+          </Form>
+        </Container>
+      )}
+
       <Container
         className="bg-body-tertiary"
         style={{
