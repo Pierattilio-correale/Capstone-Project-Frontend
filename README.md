@@ -23,6 +23,9 @@ Realizzato con React e Vite, si occupa di mostrare contenuti, raccogliere input 
 🎨 Styling pulito con CSS
 
 🛠️ Tecnologie utilizzate
+
+TypeScript 🧠
+
 React.js ⚛️
 
 Vite ⚡
