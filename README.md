@@ -1,69 +1,50 @@
-# React + TypeScript + Vite
+🌟 Jewel Paper Book - Frontend 🚀
+📚 Che cos’è Jewel Paper Book?
+Che tu sia un lettore curioso o un autore, Jewel Paper Book è la community perfetta per far brillare la tua passione per i libri! ✨
+Il posto dove le storie diventano realtà! Qui puoi leggere, scrivere e condividere racconti che ti faranno emozionare, sognare e divertire. 📖💫
+Unisciti a JPB e trasforma le tue idee in storie indimenticabili. 🖋️❤️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+📌 Descrizione del progetto
+Questo progetto frontend è la parte visiva e interattiva dell’applicazione Jewel Paper Book.
+Realizzato con React e Vite, si occupa di mostrare contenuti, raccogliere input dagli utenti e comunicare con il backend Java tramite fetch API per un’esperienza utente fluida e dinamica.
 
-Currently, two official plugins are available:
+⚠️ IMPORTANTE: Questo frontend funziona in sinergia con il backend Java. Entrambi i repository sono fondamentali per il corretto funzionamento dell’app!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 Link al backend
+[Capstone Project Backend (Java + PostgreSQL)](https://github.com/Pierattilio-correale/Capstone-Project)
 
-## Expanding the ESLint configuration
+🚀 Funzionalità principali
+🔥 Interfaccia moderna e responsive
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+⚡️ Comunicazione con backend tramite fetch API (then/catch)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+🎯 Routing gestito con React Router
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+🎨 Styling pulito con CSS
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🛠️ Tecnologie utilizzate
+React.js ⚛️
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Vite ⚡
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Fetch API 🕸️
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+React Router 🛣️
+
+CSS3 & Flexbox 🎨
+
+🚀 Come avviare il progetto
+Clona il repository:
+git clone https://github.com/Pierattilio-correale/Capstone-Project-Frontend.git
+
+Installa le dipendenze:
+npm install
+
+Avvia il progetto in modalità sviluppo:
+npm run dev
+
+Apri il browser su http://localhost:5173 🌐
+
+🤝 Collaborazioni e contributi
+Se vuoi contribuire, apri pure una pull request! 🙌
 ```
