@@ -61,3 +61,7 @@ Apri il browser su http://localhost:5173 🌐
 ### Crea una storia
 
 ![Crea una storia](https://raw.githubusercontent.com/Pierattilio-correale/Capstone-Project-Frontend/main/public/assets/create-book.png)
+
+### Sezione Profilo
+
+![Sezione Profilo](https://raw.githubusercontent.com/Pierattilio-correale/Capstone-Project-Frontend/main/public/assets/profilo.png)
