@@ -45,6 +45,23 @@ npm run dev
 
 Apri il browser su http://localhost:5173 🌐
 
+## Screenshot
+
+### Homepage
+
+![Homepage](./assets/homepage.png)
+
+### Dettagli libro
+
+![Dettagli libro](./assets/book-detail.png)
+
+### Crea una storia
+
+![Crea una storia](./assets/create-book.png)
+
 🤝 Collaborazioni e contributi
 Se vuoi contribuire, apri pure una pull request! 🙌
+
+```
+
 ```
